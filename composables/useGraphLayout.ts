@@ -35,7 +35,7 @@ export function useGraphLayout() {
       for (const reqId of skill.requires ?? []) {
         if (skillIds.has(reqId)) {
           g.setEdge(reqId, skill.id)
-          edges.push({ id: `${reqId}->${skill.id}`, source: reqId, target: skill.id, type: 'smoothstep' })
+          edges.push({ id: `${reqId}->${skill.id}`, source: reqId, target: skill.id, type: 'skill-edge' })
         }
       }
     }

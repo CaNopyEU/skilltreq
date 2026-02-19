@@ -48,6 +48,7 @@ const showList = computed(() => isMobile.value || skillStore.viewMode === 'list'
         <SkillList v-if="showList" @skill-click="onSkillClick" />
       </div>
 
+      <div v-if="skillStore.selectedSkillId" class="skills-page__backdrop" @click="onDetailClose" />
       <aside v-if="skillStore.selectedSkillId" class="skills-page__panel">
         <SkillDetail @close="onDetailClose" />
       </aside>
@@ -77,7 +78,7 @@ const showList = computed(() => isMobile.value || skillStore.viewMode === 'list'
 
 .skills-page__panel {
   width: 320px;
-  border-left: 1px solid #e5e7eb;
+  border-left: 1px solid var(--border);
   overflow-y: auto;
   flex-shrink: 0;
 }
@@ -91,10 +92,23 @@ const showList = computed(() => isMobile.value || skillStore.viewMode === 'list'
     width: 100%;
     max-height: 60vh;
     border-left: none;
-    border-top: 1px solid #e5e7eb;
-    background: white;
+    border-top: 1px solid var(--border);
+    background: var(--bg-page);
     border-radius: 16px 16px 0 0;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 50;
   }
+
+  .skills-page__backdrop {
+    display: block;
+  }
+}
+
+.skills-page__backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 49;
 }
 </style>

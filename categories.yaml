@@ -1,26 +1,26 @@
 categories:
   - id: pull
     name: Pull
-    color: "#4472C4"
+    color: "#a855f7"   # violet-500 — silná, ťahová
     description: Ťahové pohyby – pull-up, front lever, back lever, muscle-up, nordic
 
   - id: push
     name: Push
-    color: "#ED7D31"
+    color: "#f43f5e"   # rose-500 — energická, dynamická
     description: Tlačné pohyby – handstand, planche, dip, push-up, press
 
   - id: legs
     name: Legs
-    color: "#70AD47"
+    color: "#00dc82"   # nuxt emerald — pohyb, prirodzená
     description: Nohové pohyby – squat, pistol, shrimp, hamstring, leg extensions
 
   - id: core
     name: Core
-    color: "#FFC000"
+    color: "#f97316"   # orange-500 — teplá, stabilizácia
     description: Core pohyby – l-sit, v-sit, dragon flag, manna, plank
 
   - id: rings
     name: Rings
-    color: "#00B0F0"
+    color: "#22d3ee"   # cyan-400 — vzdušná, balans
     description: Kruhové pohyby – iron cross, ring muscle-up, maltese, butterfly
 

@@ -12,6 +12,19 @@ const progressStore = useProgressStore()
 
 const openCategories = ref<Set<string>>(new Set())
 
+function hexToRgba(hex: string, alpha: number) {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  return `rgba(${r},${g},${b},${alpha})`
+}
+
+function getProgressFill(skillId: string, totalSteps: number): number {
+  if (totalSteps === 0) return 0
+  const step = progressStore.getProgress(skillId).current_step
+  return Math.min(100, (step / totalSteps) * 100)
+}
+
 const groupedSkills = computed(() => {
   const map = new Map<string, { category: (typeof skillStore.categories)[0]; skills: typeof skillStore.filteredSkills }>()
 
@@ -70,6 +83,14 @@ const statusLabels: Record<ProgressStatus, string> = {
           class="skill-list__item"
           @click="emit('skill-click', skill.id)"
         >
+          <div
+            v-if="(skill.progressions?.length ?? 0) > 0"
+            class="skill-list__fill"
+            :style="{
+              width: `${getProgressFill(skill.id, skill.progressions?.length ?? 0)}%`,
+              backgroundColor: hexToRgba(group.category.color, 0.3),
+            }"
+          />
           <span class="skill-list__status">
             {{ statusLabels[progressStore.getProgress(skill.id).status] }}
           </span>
@@ -92,7 +113,7 @@ const statusLabels: Record<ProgressStatus, string> = {
   margin-bottom: 4px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
 }
 
 .skill-list__group-header {
@@ -101,31 +122,32 @@ const statusLabels: Record<ProgressStatus, string> = {
   align-items: center;
   gap: 8px;
   padding: 10px 12px;
-  background: #f9fafb;
+  background: var(--bg-surface);
   border: none;
   border-left: 4px solid;
   cursor: pointer;
   font-weight: 600;
   text-align: left;
+  color: var(--text-primary);
 }
 
 .skill-list__group-header:hover {
-  background: #f3f4f6;
+  background: var(--bg-hover);
 }
 
 .skill-list__count {
   margin-left: auto;
   font-size: 12px;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 .skill-list__chevron {
   font-size: 10px;
-  color: #9ca3af;
+  color: var(--text-faint);
 }
 
 .skill-list__items {
-  background: white;
+  background: var(--bg-page);
 }
 
 .skill-list__item {
@@ -135,28 +157,47 @@ const statusLabels: Record<ProgressStatus, string> = {
   gap: 8px;
   padding: 8px 12px;
   border: none;
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid var(--bg-muted);
   background: transparent;
   cursor: pointer;
   text-align: left;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-list__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  transition: width 0.35s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .skill-list__item:hover {
-  background: #f9fafb;
+  background: var(--bg-surface);
 }
 
 .skill-list__name {
   flex: 1;
   font-size: 14px;
+  position: relative;
+  z-index: 1;
 }
 
 .skill-list__status {
   font-size: 14px;
+  position: relative;
+  z-index: 1;
 }
 
 .skill-list__diff {
   font-size: 11px;
-  color: #9ca3af;
+  color: var(--text-faint);
   font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 </style>

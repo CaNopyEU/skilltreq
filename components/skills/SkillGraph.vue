@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { VueFlow } from '@vue-flow/core'
-import { Background } from '@vue-flow/background'
 import { Controls } from '@vue-flow/controls'
 import SkillNode from './SkillNode.vue'
+import SkillEdge from './SkillEdge.vue'
+import GraphCenterController from './GraphCenterController.vue'
 import { useSkillStore } from '../../stores/useSkillStore'
 import { useGraphLayout } from '../../composables/useGraphLayout'
 
@@ -18,6 +19,7 @@ const direction = computed(() => (skillStore.viewMode === 'graph-lr' ? 'LR' : 'T
 const layout = computed(() => buildLayout(skillStore.filteredSkills, direction.value))
 
 const nodeTypes = { skill: SkillNode }
+const edgeTypes = { 'skill-edge': SkillEdge }
 
 function onNodeClick({ node }: { node: { id: string } }) {
   emit('node-click', node.id)
@@ -31,10 +33,11 @@ function onNodeClick({ node }: { node: { id: string } }) {
       :edges="layout.edges"
       fit-view-on-init
       :node-types="nodeTypes"
+      :edge-types="edgeTypes"
       @node-click="onNodeClick"
     >
-      <Background />
       <Controls />
+      <GraphCenterController />
     </VueFlow>
   </div>
 </template>

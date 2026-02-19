@@ -20,10 +20,49 @@ const statusOptions: { value: ProgressStatus; label: string }[] = [
   { value: 'mastered', label: '⭐ Mastered' },
 ]
 
+// Prerequisite modal state
+const showPrereqModal = ref(false)
+const pendingStatus = ref<ProgressStatus | null>(null)
+const selectKey = ref(0)
+
+const blockingPrereqs = computed(() => {
+  if (!skill.value?.requires?.length) return []
+  return skill.value.requires
+    .map((reqId) => {
+      const s = skillStore.skills.find((sk) => sk.id === reqId)
+      const p = progressStore.getProgress(reqId)
+      return s ? { id: reqId, name: s.name, status: p.status } : null
+    })
+    .filter(
+      (s): s is { id: string; name: string; status: ProgressStatus } =>
+        s !== null && (s.status === 'locked' || s.status === 'in_progress'),
+    )
+})
+
 function onStatusChange(e: Event) {
   if (!skill.value) return
   const val = (e.target as HTMLSelectElement).value as ProgressStatus
-  progressStore.setStatus(skill.value.id, val)
+
+  if (blockingPrereqs.value.length > 0) {
+    pendingStatus.value = val
+    showPrereqModal.value = true
+    return
+  }
+
+  progressStore.setStatus(skill.value.id, val, skill.value.progressions?.length ?? 0)
+}
+
+function onPrereqConfirm() {
+  if (!skill.value || !pendingStatus.value) return
+  progressStore.setStatus(skill.value.id, pendingStatus.value, skill.value.progressions?.length ?? 0)
+  showPrereqModal.value = false
+  pendingStatus.value = null
+}
+
+function onPrereqCancel() {
+  showPrereqModal.value = false
+  pendingStatus.value = null
+  selectKey.value++ // reset select to current status
 }
 
 function onStepChange(step: number) {
@@ -41,6 +80,13 @@ const difficultyLabel = computed(() => {
 </script>
 
 <template>
+  <PrereqModal
+    v-if="showPrereqModal"
+    :blocking="blockingPrereqs"
+    @confirm="onPrereqConfirm"
+    @cancel="onPrereqCancel"
+  />
+
   <div v-if="skill && progress" class="skill-detail">
     <div class="skill-detail__header">
       <h2 class="skill-detail__title">{{ skill.name }}</h2>
@@ -56,7 +102,7 @@ const difficultyLabel = computed(() => {
 
     <div class="skill-detail__section">
       <label class="skill-detail__label">Status</label>
-      <select class="skill-detail__select" :value="progress.status" @change="onStatusChange">
+      <select :key="selectKey" class="skill-detail__select" :value="progress.status" @change="onStatusChange">
         <option v-for="opt in statusOptions" :key="opt.value" :value="opt.value">
           {{ opt.label }}
         </option>
@@ -74,9 +120,17 @@ const difficultyLabel = computed(() => {
           @click="onStepChange(i)"
         >
           <span class="skill-detail__prog-num">{{ i + 1 }}</span>
-          <span class="skill-detail__prog-name">{{ prog.name }}</span>
+          <span class="skill-detail__prog-content">
+            <span class="skill-detail__prog-name">{{ prog.name }}</span>
+            <span v-if="prog.mastery_criteria" class="skill-detail__prog-criteria">{{ prog.mastery_criteria }}</span>
+          </span>
         </button>
       </div>
+    </div>
+
+    <div v-if="skill.masteryCriteria" class="skill-detail__section">
+      <label class="skill-detail__label">Mastery criteria</label>
+      <p class="skill-detail__mastery">{{ skill.masteryCriteria }}</p>
     </div>
 
     <div v-if="skill.tutorials" class="skill-detail__section">
@@ -97,6 +151,17 @@ const difficultyLabel = computed(() => {
         <span v-for="reqId in skill.requires" :key="reqId" class="skill-detail__req-tag">{{ reqId }}</span>
       </div>
     </div>
+
+    <div class="skill-detail__section">
+      <label class="skill-detail__label">Notes</label>
+      <textarea
+        class="skill-detail__notes"
+        :value="progress.note"
+        placeholder="Add a note..."
+        rows="3"
+        @input="progressStore.setNote(skill.id, ($event.target as HTMLTextAreaElement).value)"
+      />
+    </div>
   </div>
 </template>
 
@@ -105,7 +170,7 @@ const difficultyLabel = computed(() => {
   padding: 16px;
   height: 100%;
   overflow-y: auto;
-  background: white;
+  background: var(--bg-page);
 }
 
 .skill-detail__header {
@@ -120,6 +185,7 @@ const difficultyLabel = computed(() => {
   font-weight: 700;
   margin: 0;
   line-height: 1.3;
+  color: var(--text-primary);
 }
 
 .skill-detail__close {
@@ -127,13 +193,13 @@ const difficultyLabel = computed(() => {
   border: none;
   font-size: 18px;
   cursor: pointer;
-  color: #6b7280;
+  color: var(--text-muted);
   padding: 0 4px;
   line-height: 1;
 }
 
 .skill-detail__close:hover {
-  color: #1f2937;
+  color: var(--text-primary);
 }
 
 .skill-detail__meta {
@@ -144,16 +210,16 @@ const difficultyLabel = computed(() => {
 
 .skill-detail__badge {
   font-size: 11px;
-  background: #f3f4f6;
+  background: var(--bg-muted);
   border-radius: 4px;
   padding: 2px 8px;
-  color: #374151;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 .skill-detail__desc {
   font-size: 14px;
-  color: #4b5563;
+  color: var(--text-body);
   margin-bottom: 16px;
   line-height: 1.5;
 }
@@ -168,17 +234,18 @@ const difficultyLabel = computed(() => {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #9ca3af;
+  color: var(--text-faint);
   margin-bottom: 6px;
 }
 
 .skill-detail__select {
   width: 100%;
   padding: 6px 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-muted);
   border-radius: 6px;
   font-size: 14px;
-  background: white;
+  background: var(--bg-page);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -193,28 +260,29 @@ const difficultyLabel = computed(() => {
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  background: #f9fafb;
+  background: var(--bg-surface);
   cursor: pointer;
   text-align: left;
   font-size: 13px;
+  color: var(--text-secondary);
 }
 
 .skill-detail__prog-step:hover {
-  background: #f3f4f6;
+  background: var(--bg-hover);
 }
 
 .skill-detail__prog-step--done {
-  background: #dcfce7;
-  border-color: #bbf7d0;
-  color: #166534;
+  background: var(--prog-done-bg);
+  border-color: var(--prog-done-border);
+  color: var(--prog-done-text);
 }
 
 .skill-detail__prog-step--active {
-  background: #dbeafe;
-  border-color: #bfdbfe;
-  color: #1e40af;
+  background: var(--prog-active-bg);
+  border-color: var(--prog-active-border);
+  color: var(--prog-active-text);
   font-weight: 600;
 }
 
@@ -224,10 +292,37 @@ const difficultyLabel = computed(() => {
   width: 18px;
   text-align: center;
   color: inherit;
+  flex-shrink: 0;
+  align-self: flex-start;
+  padding-top: 1px;
+}
+
+.skill-detail__prog-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .skill-detail__prog-name {
-  flex: 1;
+  font-size: 13px;
+}
+
+.skill-detail__prog-criteria {
+  font-size: 11px;
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+.skill-detail__mastery {
+  font-size: 13px;
+  color: var(--text-body);
+  line-height: 1.5;
+  margin: 0;
+  padding: 8px 10px;
+  background: var(--bg-muted);
+  border-radius: 6px;
+  border-left: 3px solid var(--status-mastered);
 }
 
 .skill-detail__tutorials {
@@ -252,12 +347,35 @@ const difficultyLabel = computed(() => {
   gap: 4px;
 }
 
+.skill-detail__notes {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border-muted);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  resize: vertical;
+  line-height: 1.5;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.skill-detail__notes::placeholder {
+  color: var(--text-faint);
+}
+
+.skill-detail__notes:focus {
+  outline: none;
+  border-color: var(--status-in-progress);
+}
+
 .skill-detail__req-tag {
   font-size: 11px;
-  background: #fef9c3;
-  border: 1px solid #fde68a;
+  background: var(--req-tag-bg);
+  border: 1px solid var(--req-tag-border);
   border-radius: 4px;
   padding: 2px 6px;
-  color: #92400e;
+  color: var(--req-tag-text);
 }
 </style>

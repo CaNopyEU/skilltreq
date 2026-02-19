@@ -85,6 +85,8 @@ function toggleCategory(id: string) {
         </button>
       </div>
     </div>
+
+    <ThemeToggle class="filter-panel__theme" />
   </div>
 </template>
 
@@ -94,8 +96,8 @@ function toggleCategory(id: string) {
   align-items: center;
   gap: 16px;
   padding: 8px 16px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
 }
 
@@ -110,16 +112,17 @@ function toggleCategory(id: string) {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #9ca3af;
+  color: var(--text-faint);
   white-space: nowrap;
 }
 
 .filter-panel__select {
   padding: 4px 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-muted);
   border-radius: 6px;
   font-size: 13px;
-  background: white;
+  background: var(--bg-page);
+  color: var(--text-primary);
   cursor: pointer;
 }
 
@@ -130,16 +133,17 @@ function toggleCategory(id: string) {
 
 .filter-panel__pill {
   padding: 3px 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-muted);
   border-radius: 20px;
   font-size: 12px;
-  background: white;
+  background: var(--bg-page);
+  color: var(--text-secondary);
   cursor: pointer;
   white-space: nowrap;
 }
 
 .filter-panel__pill:hover {
-  background: #f3f4f6;
+  background: var(--bg-hover);
 }
 
 .filter-panel__pill--active {
@@ -159,6 +163,11 @@ function toggleCategory(id: string) {
   align-items: center;
   gap: 4px;
   font-size: 13px;
+  color: var(--text-secondary);
   cursor: pointer;
+}
+
+.filter-panel__theme {
+  margin-left: auto;
 }
 </style>

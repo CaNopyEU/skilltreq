@@ -42,9 +42,12 @@ export const useProgressStore = defineStore('progress', () => {
     return data.value.skills[skillId] ?? { status: 'locked', current_step: 0, note: '' }
   }
 
-  function setStatus(skillId: string, status: ProgressStatus) {
+  function setStatus(skillId: string, status: ProgressStatus, totalSteps = 0) {
     const current = getProgress(skillId)
-    data.value.skills[skillId] = { ...current, status }
+    let current_step = current.current_step
+    if (status === 'mastered') current_step = totalSteps
+    else if (status === 'locked') current_step = 0
+    data.value.skills[skillId] = { ...current, status, current_step }
     saveToStorage(data.value)
   }
 
