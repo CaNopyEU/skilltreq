@@ -175,17 +175,20 @@ GITHUB_CLIENT_SECRET=...
 
 ---
 
-### Phase 1 – Core UI (bez auth, bez BE sync)
+### Phase 1 – Core UI (bez auth, bez BE sync) ✅
 **Cieľ**: Portovanie existujúcej funkcionality do Nuxt komponentov.
 
-- [ ] Pinia store: `useSkillStore` (skills, categories, progress)
-- [ ] Graph view: vue-flow komponent (desktop)
-- [ ] List view: accordion podľa kategórie (mobile + fallback)
-- [ ] Filter panel: sport / kategória / status
-- [ ] Skill detail sidebar / sheet (mobilný bottom sheet, desktop side panel)
-- [ ] Progress tracking: status change, current_step advance
-- [ ] Responsive layout: drawer pre mobile, grid pre desktop
-- [ ] LocalStorage fallback (kým neexistuje BE sync)
+- [x] Pinia store: `useSkillStore` (skills, categories, filtre, viewMode)
+- [x] Pinia store: `useProgressStore` (localStorage, mutácie)
+- [x] Server API: `GET /api/skills`, `GET /api/categories`
+- [x] Graph view: vue-flow + dagre (TB / LR layout, custom `SkillNode`)
+- [x] List view: accordion podľa kategórie (`SkillList`)
+- [x] Filter panel: sport / kategória / status + view mode dropdown (`FilterPanel`)
+- [x] Skill detail sidebar / bottom sheet (`SkillDetail` – status select, progression stepper, tutorials)
+- [x] Progress tracking: status change, current_step advance, localStorage persist
+- [x] Responsive layout: side panel na desktop, bottom sheet na mobile (<768px)
+- [x] View switcher: Graph TB / Graph LR / List
+- [x] `@vue-flow` CSS imports v `main.css`
 
 **Výstup**: Feature-parity s aktuálnym HTML generátorom, ale v Nuxt.
 
