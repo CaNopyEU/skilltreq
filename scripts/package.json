@@ -1,0 +1,18 @@
+{
+  "name": "skill-tree-generator",
+  "version": "1.0.0",
+  "description": "Generates Obsidian vault from skill tree YAML data",
+  "scripts": {
+    "generate": "bun run generate.ts && bun run generate-html.ts",
+    "generate:md": "bun run generate.ts",
+    "generate:html": "bun run generate-html.ts",
+    "watch": "bun --watch run generate.ts"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/bun": "latest"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "updated": "2026-02-19",
+  "skills": {
+    "pull-up":        { "status": "mastered" },
+    "chin-up":        { "status": "mastered" },
+    "bar-mu":         { "status": "in_progress", "current_step": 2 },
+    "front-lever":    { "status": "in_progress", "current_step": 0 },
+    "back-lever":     { "status": "unlocked" },
+    "hamstring-bridge": { "status": "mastered" },
+    "push-up":        { "status": "mastered" },
+    "planche-lean":   { "status": "unlocked" },
+    "pseudo-pu":      { "status": "unlocked" },
+    "planche":        { "status": "in_progress", "current_step": 0 },
+    "dip":            { "status": "mastered" },
+    "handstand":      { "status": "in_progress", "current_step": 1 },
+    "wall-hs":        { "status": "unlocked" },
+    "plank":          { "status": "mastered" },
+    "l-sit":          { "status": "unlocked" },
+    "squat":          { "status": "mastered" },
+    "pistol-squat":   { "status": "unlocked" },
+    "ring-push-up":   { "status": "mastered" },
+    "ring-dip":       { "status": "unlocked" }
+  }
+}

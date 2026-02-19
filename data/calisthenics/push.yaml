@@ -1,0 +1,511 @@
+# Push – tlačné pohyby
+
+- id: push-up
+  name: Push-Up
+  category: push
+  difficulty: 2
+  status: mastered
+  type: skill
+  requires: []
+  tutorials:
+    main: "https://youtu.be/IODxDxX7oi4"
+    alt: "https://youtu.be/-WXc4E-zcao"
+  progressions:
+    - name: Incline Push-Up
+      mastery_criteria: "15+ reps"
+    - name: Scapula Push-Up
+      mastery_criteria: "10 reps"
+    - name: Diamond Push-Up
+      mastery_criteria: "10 reps"
+    - name: Tiger Band Push-Up
+      mastery_criteria: "10 reps"
+    - name: Archer Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Walking Gecko Push-Up
+      mastery_criteria: "5 reps"
+    - name: Explosive Push-Up
+      mastery_criteria: "5 reps"
+    - name: Push-Up
+      mastery_criteria: "30+ strict reps"
+  mastery_criteria: "30+ strict reps"
+
+- id: oa-push-up
+  name: OA Push-Up
+  category: push
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: "https://youtu.be/r8MhfU4Qs2g?t=431"
+    alt: "https://youtu.be/KIEAbfk4cQU"
+  progressions:
+    - name: Incline OA Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Hinge OA Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Fingertip OA Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Archer Push-Up
+      mastery_criteria: "10 reps each side"
+    - name: OA Push-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: planche-lean
+  name: Planche Lean
+  category: push
+  difficulty: 4
+  status: unlocked
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: "https://youtu.be/5D5PB5VCCDU?t=15"
+    alt: "https://youtu.be/ns_5fl0oN4A"
+  progressions:
+    - name: Planche Lean Cranks
+      mastery_criteria: "3x10 reps"
+    - name: Elbow Planche Lean
+      mastery_criteria: "30s hold"
+    - name: Elevated Planche Lean
+      mastery_criteria: "30s hold"
+    - name: Pseudo Maltese Press
+      mastery_criteria: "5 reps"
+    - name: Planche Lean
+      mastery_criteria: "30s hold"
+  mastery_criteria: "30s hold"
+
+- id: pseudo-pu
+  name: Pseudo Planche Push-Up
+  abbr: Pseudo PU
+  category: push
+  difficulty: 5
+  status: unlocked
+  type: skill
+  requires: [planche-lean]
+  tutorials:
+    main: "https://youtu.be/G7GTVsxNU7g?t=47"
+    alt: "https://www.youtube.com/watch?v=G7GTVsxNU7g"
+  progressions:
+    - name: Pseudo PU Bicep Turned Out
+      mastery_criteria: "10+ reps"
+    - name: Archer Pseudo Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Pseudo Planche Push-Up
+      mastery_criteria: "10+ strict reps"
+  mastery_criteria: "10+ strict reps"
+
+- id: planche
+  name: Planche
+  category: push
+  difficulty: 9
+  status: in_progress
+  type: skill
+  requires: [pseudo-pu]
+  tutorials:
+    main: "https://youtu.be/FwcjA2ZR5UA?t=102"
+    alt: "https://youtu.be/3UpGBGV5Sxo"
+  progressions:
+    - name: Tuck Planche
+      mastery_criteria: "15s hold"
+    - name: Adv. Tuck Planche
+      mastery_criteria: "10s hold"
+    - name: Straddle Planche
+      mastery_criteria: "5s hold"
+    - name: Half Lay Planche
+      mastery_criteria: "5s hold"
+    - name: Full Planche
+      mastery_criteria: "5s hold"
+    - name: 2 Finger Planche
+      mastery_criteria: "3s hold"
+    - name: 2+1 Finger Planche
+      mastery_criteria: "3s hold"
+    - name: Straight Bar Planche
+      mastery_criteria: "3s hold"
+  current_step: 0
+  mastery_criteria: "5s clean hold"
+
+- id: planche-push-up
+  name: Planche Push-Up
+  category: push
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [planche]
+  tutorials:
+    main: "https://youtu.be/hqGiXHOLgoM?t=110"
+    alt: "https://youtu.be/3UpGBGV5Sxo?t=389"
+  progressions:
+    - name: Tuck Planche Push-Up
+      mastery_criteria: "5 reps"
+    - name: Adv. Tuck Planche Push-Up
+      mastery_criteria: "5 reps"
+    - name: Straddle Planche Push-Up
+      mastery_criteria: "5 reps"
+    - name: Full Planche Push-Up
+      mastery_criteria: "5 consecutive strict reps"
+    - name: Extra ROM Planche Push-Up
+      mastery_criteria: "5 reps"
+    - name: Archer Planche Push-Up
+      mastery_criteria: "5 reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: bicep-planche
+  name: Bicep Planche
+  category: push
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [planche-push-up]
+  tutorials:
+    main: "https://youtu.be/4FIGVlylUWw"
+    alt: ""
+  progressions:
+    - name: Pinkies Bicep Planche
+      mastery_criteria: "5s hold"
+    - name: Bicep Planche
+      mastery_criteria: "5s clean hold"
+  mastery_criteria: "5s clean hold"
+
+- id: oa-bicep-planche
+  name: OA Bicep Planche
+  category: push
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [bicep-planche]
+  tutorials:
+    main: "https://youtu.be/s3mC7KO-9kg?t=97"
+    alt: ""
+  progressions:
+    - name: Assisted OA Bicep Planche
+      mastery_criteria: "3s hold"
+    - name: OA Bicep Planche
+      mastery_criteria: "3s clean hold"
+  mastery_criteria: "3s clean hold"
+
+- id: qa-planche
+  name: QA Planche
+  category: push
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [planche]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5s clean hold"
+
+- id: qa-planche-push-up
+  name: QA Planche Push-Up
+  category: push
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [qa-planche]
+  tutorials:
+    main: "https://youtu.be/St6O79TszOY?t=82"
+    alt: ""
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: oa-planche
+  name: OA Planche
+  category: push
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [qa-planche]
+  tutorials:
+    main: "https://youtu.be/BRG4iHBj3EU?t=244"
+    alt: "https://youtu.be/ALctTQ9TzoA"
+  progressions:
+    - name: Band Assisted OA Planche
+      mastery_criteria: "3s hold"
+    - name: Arm Assisted OA Planche
+      mastery_criteria: "3s hold"
+    - name: OA Planche
+      mastery_criteria: "3s clean hold"
+  mastery_criteria: "3s clean hold"
+
+- id: planche-press
+  name: Planche Press
+  category: push
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [planche, maltese-press]
+  tutorials:
+    main: "https://youtu.be/wD3Mk7WSTgc"
+    alt: "https://youtu.be/sa4vKNEWKQ0"
+  mastery_criteria: "3 controlled reps"
+  notes: "Legendary skill"
+
+- id: maltese-press
+  name: Maltese Press
+  category: push
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [planche, ring-maltese]
+  tutorials:
+    main: "https://youtu.be/Wwro7ZIBFa4?t=7"
+    alt: "https://youtu.be/sHZReAwO_h0"
+  progressions:
+    - name: Straight Bar Maltese
+      mastery_criteria: "3s hold"
+    - name: Parallel Bar Maltese
+      mastery_criteria: "3s hold"
+    - name: Dragon Maltese
+      mastery_criteria: "3s hold"
+    - name: Maltese Press
+      mastery_criteria: "3 controlled reps"
+  mastery_criteria: "3 controlled reps"
+  notes: "Legendary skill"
+
+- id: reverse-planche
+  name: Reverse Planche
+  category: push
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [planche]
+  tutorials:
+    main: "https://youtu.be/OxIYm7UFaJc?t=8"
+    alt: "https://youtu.be/0t1ThGLaAkc"
+  progressions:
+    - name: Floor Reverse Planche
+      mastery_criteria: "5s hold"
+    - name: PB Reverse Planche
+      mastery_criteria: "5s hold"
+    - name: Reverse Planche
+      mastery_criteria: "5s clean hold"
+  mastery_criteria: "5s clean hold"
+
+- id: dip
+  name: Dip
+  category: push
+  difficulty: 3
+  status: mastered
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: "https://youtu.be/2z8JmcrW-As?t=30"
+    alt: "https://youtu.be/2z8JmcrW-As"
+  progressions:
+    - name: Straight Bar Dip
+      mastery_criteria: "10+ reps"
+    - name: Russian Dip
+      mastery_criteria: "5 reps"
+    - name: Korean Dip
+      mastery_criteria: "5 reps"
+    - name: Archer Dip
+      mastery_criteria: "5 reps each side"
+    - name: Swinging Dip
+      mastery_criteria: "5 reps"
+    - name: Dip
+      mastery_criteria: "20+ strict reps"
+  mastery_criteria: "20+ strict reps"
+
+- id: oa-dip
+  name: OA Dip
+  category: push
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [dip]
+  tutorials:
+    main: "https://youtu.be/8lu2c3E3NSc?t=20"
+    alt: "https://youtu.be/bAI0XtahBOg?list=PL5u0Iy7WhVMVIzguJt8MsGJ-u5beonXFq"
+  progressions:
+    - name: Assisted OA Dip
+      mastery_criteria: "5 reps each side"
+    - name: Half ROM OA Dip
+      mastery_criteria: "5 reps each side"
+    - name: OA Dip
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: imp-dip
+  name: Impossible Dip
+  abbr: Imp. Dip
+  category: push
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [dip]
+  tutorials:
+    main: "https://youtu.be/rbzJvb0Y9Uk?t=320"
+    alt: "https://youtu.be/rbzJvb0Y9Uk"
+  progressions:
+    - name: Lean Imp. Dip
+      mastery_criteria: "5 reps"
+    - name: Imp. Dip Without Elbow Support
+      mastery_criteria: "5 reps"
+    - name: No Grip Imp. Dip
+      mastery_criteria: "5 reps"
+    - name: Straight Bar Imp. Dip
+      mastery_criteria: "5 reps"
+    - name: Wrist Imp. Dip
+      mastery_criteria: "5 reps"
+    - name: Impossible Dip
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: bulgarian-dip
+  name: Bulgarian Dip
+  category: push
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [dip]
+  tutorials:
+    main: "https://youtu.be/9mKyrPmmPt0"
+    alt: "https://youtu.be/L6xJyFU9OBA"
+  progressions:
+    - name: L-Sit Bulgarian Dip
+      mastery_criteria: "5 reps"
+    - name: Bulgarian Dip
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: handstand
+  name: Handstand
+  abbr: HS
+  category: push
+  difficulty: 6
+  status: in_progress
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: "https://youtu.be/h680H2ft4yA?t=273"
+    alt: "https://youtu.be/NkzbyRAoQ8c"
+  progressions:
+    - name: Pike Hold (wall)
+      mastery_criteria: "60s hold"
+    - name: Kick-up practice
+      mastery_criteria: "Consistent kick-ups"
+    - name: Handstand
+      mastery_criteria: "60s freestanding hold"
+    - name: Parallettes HS
+      mastery_criteria: "30s hold"
+    - name: Straddle HS
+      mastery_criteria: "30s hold"
+    - name: Straight Bar HS
+      mastery_criteria: "10s hold"
+    - name: X Handstand
+      mastery_criteria: "5s hold"
+  current_step: 1
+  mastery_criteria: "60s freestanding hold"
+
+- id: wall-hs
+  name: Wall Handstand
+  abbr: Wall HS
+  category: push
+  difficulty: 4
+  status: unlocked
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: "https://youtu.be/QlvhMCV_ImM?t=41"
+    alt: "https://youtu.be/H2KSIMwNOfA"
+  progressions:
+    - name: Stomach To Wall HS
+      mastery_criteria: "30s hold"
+    - name: Back To Wall HS
+      mastery_criteria: "60s hold"
+    - name: Wall HS Kick Off
+      mastery_criteria: "5 reps"
+    - name: Wall Handstand
+      mastery_criteria: "60s belly-to-wall hold"
+  mastery_criteria: "60s belly-to-wall hold"
+
+- id: hs-push-up
+  name: Handstand Push-Up
+  abbr: HS Push-Up
+  category: push
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [handstand]
+  tutorials:
+    main: "https://youtu.be/h0HjqYRlXYg?t=18"
+    alt: "https://youtu.be/h0HjqYRlXYg"
+  progressions:
+    - name: Pike Push-Up
+      mastery_criteria: "10+ reps"
+    - name: Wall HSPU
+      mastery_criteria: "5 reps"
+    - name: Handstand Push-Up
+      mastery_criteria: "5 consecutive strict reps"
+    - name: Tiger Bend HS Push-Up
+      mastery_criteria: "5 reps"
+    - name: 90° HS Push-Up
+      mastery_criteria: "5 reps"
+    - name: Extremely Wide HS Push-Up
+      mastery_criteria: "5 reps"
+    - name: Clapping HS Push-Up
+      mastery_criteria: "5 reps"
+    - name: Elevator HS Push-Up
+      mastery_criteria: "5 reps"
+    - name: Inverted MU On Bar
+      mastery_criteria: "5 reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: hs-pike-press
+  name: HS Pike Press
+  category: push
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [hs-push-up]
+  tutorials:
+    main: "https://youtu.be/jmLGE8sO8nk?t=14"
+    alt: "https://youtu.be/jmLGE8sO8nk"
+  progressions:
+    - name: Tuck HS Press
+      mastery_criteria: "5 reps"
+    - name: Frog HS Press
+      mastery_criteria: "5 reps"
+    - name: Straddle HS Press
+      mastery_criteria: "5 reps"
+    - name: HS Pike Press
+      mastery_criteria: "5 consecutive controlled reps"
+  mastery_criteria: "5 consecutive controlled reps"
+
+- id: oa-hs-press
+  name: OA HS Press
+  category: push
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [hs-pike-press]
+  tutorials:
+    main: "https://youtu.be/lVqDPymzcDQ?t=163"
+    alt: "https://youtu.be/UE9Tn08BZBA"
+  mastery_criteria: "3 controlled reps"
+
+- id: oa-hs
+  name: OA Handstand
+  abbr: OA HS
+  category: push
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [oa-hs-press]
+  tutorials:
+    main: "https://youtu.be/lVqDPymzcDQ?t=18"
+    alt: "https://youtu.be/UE9Tn08BZBA"
+  mastery_criteria: "5s freestanding hold"
+  notes: "Legendary skill"
+
+- id: imp-tigerbend-hs-push-up
+  name: Imp. Tigerbend HS Push-Up
+  category: push
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [handstand, hs-push-up]
+  tutorials:
+    main: "https://youtu.be/xCzD-_-b2Y8?list=PL5u0Iy7WhVMVIzguJt8MsGJ-u5beonXFq&t=221"
+    alt: ""
+  mastery_criteria: "5 consecutive controlled reps"

@@ -1,0 +1,405 @@
+# Rings – kruhové pohyby
+
+- id: ring-push-up
+  name: Ring Push-Up
+  category: rings
+  difficulty: 3
+  status: mastered
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: "https://youtu.be/dSRY2IHqOsI?t=10"
+    alt: "https://youtu.be/rUGZwSa9WUc"
+  progressions:
+    - name: Archer Ring Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Wide Ring Push-Up
+      mastery_criteria: "10+ reps"
+    - name: Pelican Ring Push-Up
+      mastery_criteria: "5 reps"
+    - name: Ring Push-Up
+      mastery_criteria: "15+ strict reps"
+  mastery_criteria: "15+ strict reps"
+
+- id: ring-pu
+  name: Ring Pull-Up
+  abbr: Ring PU
+  category: rings
+  difficulty: 4
+  status: locked
+  type: skill
+  requires: [ring-push-up, pull-up]
+  tutorials:
+    main: "https://youtu.be/ESF3YdVt5RM?t=8"
+    alt: "https://www.youtube.com/watch?v=IKOeF0VFSq8"
+  progressions:
+    - name: Switch Grip Ring Pull-Up
+      mastery_criteria: "5 reps"
+    - name: L-Sit Ring Pull-Up
+      mastery_criteria: "5 reps"
+    - name: Ring Pull-Up
+      mastery_criteria: "10+ strict reps"
+  mastery_criteria: "10+ strict reps"
+
+- id: ring-turn-out
+  name: Ring Turn Out
+  category: rings
+  difficulty: 4
+  status: locked
+  type: skill
+  requires: [ring-push-up]
+  tutorials:
+    main: "https://youtu.be/i4uew2bAU3E"
+    alt: "https://youtu.be/31HMRQisaFU"
+  progressions:
+    - name: L-Sit Rings Support Hold
+      mastery_criteria: "10s hold"
+    - name: Tuck Rings Support Hold
+      mastery_criteria: "10s hold"
+    - name: Regular Rings Support Hold
+      mastery_criteria: "20s hold"
+    - name: Rings Support Hold Extended
+      mastery_criteria: "10s hold"
+    - name: Ring Turn Out
+      mastery_criteria: "30s controlled hold"
+  mastery_criteria: "30s controlled hold"
+
+- id: ring-flies
+  name: Ring Flies
+  category: rings
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [ring-push-up]
+  tutorials:
+    main: "https://youtu.be/1eqKau93EPw?t=29"
+    alt: "https://www.youtube.com/watch?v=1eqKau93EPw"
+  progressions:
+    - name: Incline Ring Flies
+      mastery_criteria: "10+ reps"
+    - name: Decline Ring Flies
+      mastery_criteria: "5 reps"
+    - name: Ring Flies
+      mastery_criteria: "10+ strict reps"
+  mastery_criteria: "10+ strict reps"
+
+- id: straight-arm-ring-flies
+  name: Straight Arm Ring Flies
+  category: rings
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [ring-flies]
+  tutorials:
+    main: "https://youtu.be/JhToSOOqYdI?t=15"
+    alt: "https://youtu.be/JhToSOOqYdI"
+  progressions:
+    - name: Incline Straight Arm Ring Flies
+      mastery_criteria: "5 reps"
+    - name: Decline Straight Arm Ring Flies
+      mastery_criteria: "5 reps"
+    - name: Straight Arm Ring Flies
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ring-dip
+  name: Ring Dip
+  category: rings
+  difficulty: 4
+  status: unlocked
+  type: skill
+  requires: [dip, ring-push-up]
+  tutorials:
+    main: "https://youtu.be/Kr5Uuuy5DAI?t=106"
+    alt: "https://youtu.be/Kr5Uuuy5DAI?t=60"
+  progressions:
+    - name: OA Assisted Ring Dip
+      mastery_criteria: "5 reps each side"
+    - name: Archer Ring Dip
+      mastery_criteria: "5 reps each side"
+    - name: Ring Dip
+      mastery_criteria: "15+ strict reps"
+  mastery_criteria: "15+ strict reps"
+
+- id: ring-mu
+  name: Ring Muscle-Up
+  abbr: Ring MU
+  category: rings
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [ring-dip, bar-mu]
+  tutorials:
+    main: "https://youtu.be/vpPjY4BtJuI"
+    alt: "https://youtu.be/vpPjY4BtJuI"
+  progressions:
+    - name: Slow Ring MU
+      mastery_criteria: "3 controlled reps"
+    - name: L-Sit Ring MU
+      mastery_criteria: "3 reps"
+    - name: Archer Ring MU
+      mastery_criteria: "3 reps each side"
+    - name: Ring Muscle-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ring-bi
+  name: Ring Back Invert
+  abbr: Ring BI
+  category: rings
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [ring-mu]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 controlled reps"
+
+- id: ring-hs
+  name: Ring Handstand
+  abbr: Ring HS
+  category: rings
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [ring-bi, handstand]
+  tutorials:
+    main: "https://youtu.be/BTAsmZAOLVU?t=7"
+    alt: "https://youtu.be/MxQjAcIG7k4"
+  progressions:
+    - name: Ring Straps Assisted HS
+      mastery_criteria: "10s hold"
+    - name: Shoulder Tuck Ring HS
+      mastery_criteria: "5s hold"
+    - name: Shoulder Ring HS
+      mastery_criteria: "5s hold"
+    - name: Ring Handstand
+      mastery_criteria: "5s clean hold"
+  mastery_criteria: "5s clean hold"
+
+- id: morozov
+  name: Morozov
+  category: rings
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [ring-bi]
+  tutorials:
+    main: "https://youtu.be/ZQzQRaQ0Lb0?t=119"
+    alt: "https://youtu.be/rbzJvb0Y9Uk"
+  progressions:
+    - name: Band Assisted Morozov Hold
+      mastery_criteria: "5s hold"
+    - name: Morozov
+      mastery_criteria: "3 controlled reps"
+  mastery_criteria: "3 controlled reps"
+
+- id: ring-planche
+  name: Ring Planche
+  category: rings
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [ring-bi, planche]
+  tutorials:
+    main: "https://youtu.be/DsHRWT2-PvY"
+    alt: "https://www.youtube.com/watch?v=7AdMqt8i60E"
+  mastery_criteria: "5s clean hold"
+
+- id: ring-planche-press
+  name: Ring Planche Press
+  category: rings
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [ring-planche]
+  tutorials:
+    main: "https://youtu.be/6iC3dxxtFD8?t=137"
+    alt: "https://youtu.be/sa4vKNEWKQ0"
+  mastery_criteria: "3 controlled reps"
+
+- id: ring-maltese
+  name: Ring Maltese
+  category: rings
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [ring-planche, iron-cross]
+  tutorials:
+    main: "https://youtu.be/BREPvFm4ZNA?t=5"
+    alt: "https://youtu.be/7AdMqt8i60E"
+  mastery_criteria: "5s clean hold"
+  notes: "Legendary skill"
+
+- id: ring-victorian-cross
+  name: Ring Victorian Cross
+  category: rings
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [ring-maltese]
+  tutorials:
+    main: "https://youtu.be/zNqNDhap-QQ?t=45"
+    alt: "https://youtu.be/7AdMqt8i60E"
+  mastery_criteria: "5s clean hold"
+  notes: "Legendary skill"
+
+- id: van-gelder
+  name: Van Gelder
+  category: rings
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [ring-victorian-cross]
+  tutorials:
+    main: "https://youtu.be/--U_mgXrYbY?t=250"
+    alt: "https://youtu.be/7AdMqt8i60E"
+  mastery_criteria: "3 controlled reps"
+  notes: "Legendary skill"
+
+- id: zanetti
+  name: Zanetti
+  category: rings
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [van-gelder]
+  tutorials:
+    main: "https://youtu.be/sDqUD_oiDY4?t=31"
+    alt: "https://youtu.be/7AdMqt8i60E"
+  mastery_criteria: "3 controlled reps"
+  notes: "Legendary skill"
+
+- id: carmona
+  name: Carmona
+  category: rings
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [zanetti]
+  tutorials:
+    main: "https://youtu.be/sDqUD_oiDY4?t=100"
+    alt: "https://youtu.be/7AdMqt8i60E"
+  mastery_criteria: "1 controlled rep"
+  notes: "Legendary skill"
+
+- id: butterfly
+  name: Butterfly
+  category: rings
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [ring-turn-out]
+  tutorials:
+    main: "https://youtu.be/mnmIKqx-V-Y?t=687"
+    alt: "https://youtu.be/lHKaQx6duC0"
+  mastery_criteria: "5 controlled reps"
+
+- id: inv-butterfly
+  name: Inverted Butterfly
+  abbr: Inv. Butterfly
+  category: rings
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [butterfly]
+  tutorials:
+    main: "https://youtu.be/yElLMbilg0g?t=2"
+    alt: ""
+  mastery_criteria: "5 controlled reps"
+
+- id: iron-cross
+  name: Iron Cross
+  category: rings
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [ring-dip, ring-flies]
+  tutorials:
+    main: "https://youtu.be/HZbee93OIdo?t=12"
+    alt: "https://youtu.be/lHKaQx6duC0"
+  progressions:
+    - name: Band Assisted Iron Cross
+      mastery_criteria: "5s hold"
+    - name: Forearm Assisted Iron Cross
+      mastery_criteria: "5s hold"
+    - name: Ring Lever Assisted Iron Cross
+      mastery_criteria: "5s hold"
+    - name: Iron Cross
+      mastery_criteria: "5s clean hold"
+  mastery_criteria: "5s clean hold"
+
+- id: iron-cross-press
+  name: Iron Cross Press
+  category: rings
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [iron-cross]
+  tutorials:
+    main: "https://youtu.be/H7TQ3qtCYIE?t=147"
+    alt: "https://youtu.be/lHKaQx6duC0"
+  progressions:
+    - name: Band Assisted Iron Cross Press
+      mastery_criteria: "5 reps"
+    - name: Forearm Assisted Iron Cross Press
+      mastery_criteria: "5 reps"
+    - name: Ring Lever Assisted Iron Cross Press
+      mastery_criteria: "5 reps"
+    - name: Iron Cross Press
+      mastery_criteria: "5 controlled reps"
+  mastery_criteria: "5 controlled reps"
+
+- id: inverted-iron-cross
+  name: Inverted Iron Cross
+  category: rings
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [iron-cross-press]
+  tutorials:
+    main: "https://youtu.be/xHO3jP-eF_U?t=27"
+    alt: "https://youtu.be/sHZReAwO_h0?t=90"
+  progressions:
+    - name: Ring Straps Assisted Inverted Iron Cross
+      mastery_criteria: "5s hold"
+    - name: Inverted Iron Cross
+      mastery_criteria: "5s clean hold"
+  mastery_criteria: "5s clean hold"
+
+- id: wide-ring-mu
+  name: Wide Ring Muscle-Up
+  abbr: Wide Ring MU
+  category: rings
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [ring-mu]
+  tutorials:
+    main: "https://youtu.be/TYqUlv401mM?t=5"
+    alt: "https://youtu.be/McSrX-cnv4g?t=25"
+  progressions:
+    - name: Band Assisted Wide Ring MU
+      mastery_criteria: "5 reps light band"
+    - name: Wide Ring Muscle-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: bulgarian-dip-rings
+  name: Bulgarian Dip (Rings)
+  abbr: Bulgarian Dip
+  category: rings
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [ring-dip]
+  tutorials:
+    main: "https://youtu.be/9mKyrPmmPt0"
+    alt: "https://youtu.be/L6xJyFU9OBA"
+  progressions:
+    - name: L-Sit Bulgarian Dip
+      mastery_criteria: "5 reps"
+    - name: Bulgarian Dip
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"

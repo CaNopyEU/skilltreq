@@ -1,0 +1,175 @@
+# Acrobatics / Floor – podlahová akrobacia
+
+- id: forward-roll
+  name: Forward Roll
+  category: core
+  difficulty: 1
+  status: locked
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 clean reps"
+
+- id: dive-roll
+  name: Dive Roll
+  category: core
+  difficulty: 3
+  status: locked
+  type: skill
+  requires: [forward-roll]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Low Dive Roll
+      mastery_criteria: "5 clean reps"
+    - name: Dive Roll
+      mastery_criteria: "5 clean reps"
+  mastery_criteria: "5 clean reps"
+
+- id: backward-roll
+  name: Backward Roll
+  category: core
+  difficulty: 2
+  status: locked
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 clean reps"
+
+- id: back-walkover
+  name: Back Walkover
+  category: core
+  difficulty: 5
+  status: locked
+  type: skill
+  requires: [backward-roll]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Bridge Kickover
+      mastery_criteria: "5 clean reps"
+    - name: Back Walkover
+      mastery_criteria: "5 clean reps"
+  mastery_criteria: "5 clean reps"
+
+- id: cartwheel
+  name: Cartwheel
+  category: core
+  difficulty: 2
+  status: locked
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 clean reps each side"
+
+- id: round-off
+  name: Round-Off
+  category: core
+  difficulty: 4
+  status: locked
+  type: skill
+  requires: [cartwheel]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 clean reps"
+
+- id: back-tuck
+  name: Back Tuck
+  category: core
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [round-off]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Back Tuck
+      mastery_criteria: "5 clean reps"
+    - name: Back Tuck
+      mastery_criteria: "5 clean reps"
+  mastery_criteria: "5 clean reps"
+
+- id: back-layout
+  name: Back Layout
+  category: core
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [back-tuck]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 clean reps"
+
+- id: back-pike
+  name: Back Pike
+  category: core
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [back-tuck]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 clean reps"
+
+- id: front-walkover
+  name: Front Walkover
+  category: core
+  difficulty: 4
+  status: locked
+  type: skill
+  requires: [forward-roll, handstand]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Handstand Forward Roll
+      mastery_criteria: "5 clean reps"
+    - name: Front Walkover
+      mastery_criteria: "5 clean reps"
+  mastery_criteria: "5 clean reps"
+
+- id: front-aerial
+  name: Front Aerial
+  category: core
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [front-walkover]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Front Aerial
+      mastery_criteria: "5 clean reps"
+    - name: Front Aerial
+      mastery_criteria: "5 clean reps"
+  mastery_criteria: "5 clean reps"
+
+- id: aerial
+  name: Aerial (No-Hand Cartwheel)
+  category: core
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [cartwheel]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Aerial
+      mastery_criteria: "5 clean reps"
+    - name: Aerial
+      mastery_criteria: "5 clean reps each side"
+  mastery_criteria: "5 clean reps each side"

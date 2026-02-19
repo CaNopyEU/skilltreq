@@ -1,0 +1,71 @@
+# ===========================
+# Dependencies
+# ===========================
+node_modules/
+.pnp
+.pnp.js
+
+# ===========================
+# Build output (current generator)
+# ===========================
+build/
+
+# ===========================
+# Nuxt (Phase 0+)
+# ===========================
+.nuxt/
+.output/
+.nitro/
+.cache/
+dist/
+
+# ===========================
+# Environment & secrets
+# ===========================
+.env
+.env.*
+!.env.example
+
+# ===========================
+# DB (local dev)
+# ===========================
+*.db
+*.sqlite
+*.sqlite3
+
+# Drizzle migrations snapshot (generated, not source)
+drizzle/meta/
+
+# ===========================
+# Logs
+# ===========================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===========================
+# OS
+# ===========================
+.DS_Store
+Thumbs.db
+desktop.ini
+.Spotlight-V100
+.Trashes
+
+# ===========================
+# IDE
+# ===========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===========================
+# Misc
+# ===========================
+*.tmp
+tmp/

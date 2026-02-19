@@ -1,0 +1,425 @@
+# Legs – nohové pohyby
+
+- id: squat
+  name: Squat
+  category: legs
+  difficulty: 1
+  status: mastered
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Box Squat
+      mastery_criteria: "10 reps"
+    - name: Squat
+      mastery_criteria: "20+ reps full ROM"
+  mastery_criteria: "20+ reps full ROM"
+
+- id: pistol-squat
+  name: Pistol Squat
+  category: legs
+  difficulty: 4
+  status: unlocked
+  type: skill
+  requires: [squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Pistol Squat
+      mastery_criteria: "5 reps each side"
+    - name: Box Pistol Squat
+      mastery_criteria: "5 reps each side"
+    - name: Pistol Squat
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: hawaiian-squat
+  name: Hawaiian Squat
+  category: legs
+  difficulty: 5
+  status: locked
+  type: skill
+  requires: [pistol-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Hawaiian Squat
+      mastery_criteria: "5 reps each side"
+    - name: Hawaiian Squat
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: sissy-squat
+  name: Sissy Squat
+  category: legs
+  difficulty: 5
+  status: locked
+  type: skill
+  requires: [hawaiian-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Partial Sissy Squat
+      mastery_criteria: "10 reps"
+    - name: Sissy Squat
+      mastery_criteria: "10+ strict reps"
+  mastery_criteria: "10+ strict reps"
+
+- id: ol-sissy-squat
+  name: OL Sissy Squat
+  category: legs
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [sissy-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted OL Sissy Squat
+      mastery_criteria: "5 reps each side"
+    - name: OL Sissy Squat
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: elv-ol-sissy-squat
+  name: Elv. OL Sissy Squat
+  category: legs
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [ol-sissy-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Low Elevation OL Sissy Squat
+      mastery_criteria: "5 reps each side"
+    - name: Elv. OL Sissy Squat
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: shrimp-squat
+  name: Shrimp Squat
+  category: legs
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [pistol-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Shrimp Squat
+      mastery_criteria: "5 reps each side"
+    - name: Shrimp Squat
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: elv-shrimp-squat
+  name: Elevated Shrimp Squat
+  abbr: Elv. Shrimp Squat
+  category: legs
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [shrimp-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Low Elv. Shrimp Squat
+      mastery_criteria: "5 reps each side"
+    - name: Elv. Shrimp Squat
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: shrimp-squat-blaster
+  name: Shrimp Squat Blaster
+  category: legs
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [elv-shrimp-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: leg-ext-lever
+  name: Leg Extension Lever
+  abbr: Leg Ext. Lever
+  category: legs
+  difficulty: 5
+  status: locked
+  type: skill
+  requires: [squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Leg Ext. Lever
+      mastery_criteria: "5s hold"
+    - name: Leg Extension Lever
+      mastery_criteria: "5s hold"
+  mastery_criteria: "5s hold"
+
+- id: ol-leg-ext-lever
+  name: OL Leg Extension Lever
+  abbr: OL Leg Ext. Lever
+  category: legs
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [leg-ext-lever]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted OL Leg Ext. Lever
+      mastery_criteria: "5s hold each side"
+    - name: OL Leg Extension Lever
+      mastery_criteria: "5s hold each side"
+  mastery_criteria: "5s hold each side"
+
+- id: natural-leg-ext
+  name: Natural Leg Extension
+  abbr: Natural Leg Ext.
+  category: legs
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [leg-ext-lever]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Natural Leg Ext.
+      mastery_criteria: "5 reps"
+    - name: Natural Leg Extension
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ol-natural-leg-ext
+  name: OL Natural Leg Extension
+  abbr: OL Natural Leg Ext.
+  category: legs
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [natural-leg-ext]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted OL Natural Leg Ext.
+      mastery_criteria: "5 reps each side"
+    - name: OL Natural Leg Extension
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: matrix-leg-ext
+  name: Matrix Leg Extension
+  abbr: Matrix Leg Ext.
+  category: legs
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [ol-natural-leg-ext]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Matrix Leg Ext.
+      mastery_criteria: "5 reps"
+    - name: Matrix Leg Extension
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ol-matrix-leg-ext
+  name: OL Matrix Leg Extension
+  abbr: OL Matrix Leg Ext.
+  category: legs
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [matrix-leg-ext]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted OL Matrix Leg Ext.
+      mastery_criteria: "5 reps each side"
+    - name: OL Matrix Leg Extension
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: elv-ol-matrix-leg-ext
+  name: Elv. OL Matrix Leg Extension
+  abbr: Elv. OL Matrix Leg Ext.
+  category: legs
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [ol-matrix-leg-ext]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Low Elv. OL Matrix Leg Ext.
+      mastery_criteria: "5 reps each side"
+    - name: Elv. OL Matrix Leg Extension
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: elv-matrix-leg-ext
+  name: Elv. Matrix Leg Extension
+  abbr: Elv. Matrix Leg Ext.
+  category: legs
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [matrix-leg-ext]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Low Elv. Matrix Leg Ext.
+      mastery_criteria: "5 reps"
+    - name: Elv. Matrix Leg Extension
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: natural-leg-press
+  name: Natural Leg Press
+  category: legs
+  difficulty: 6
+  status: locked
+  type: skill
+  requires: [natural-leg-ext]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Natural Leg Press
+      mastery_criteria: "5 reps"
+    - name: Natural Leg Press
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ol-natural-leg-press
+  name: OL Natural Leg Press
+  category: legs
+  difficulty: 8
+  status: locked
+  type: skill
+  requires: [natural-leg-press]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted OL Natural Leg Press
+      mastery_criteria: "5 reps each side"
+    - name: OL Natural Leg Press
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+- id: elv-ol-natural-leg-press
+  name: Elv. OL Natural Leg Press
+  category: legs
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [ol-natural-leg-press]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Low Elv. OL Natural Leg Press
+      mastery_criteria: "5 reps each side"
+    - name: Elv. OL Natural Leg Press
+      mastery_criteria: "5 consecutive strict reps each side"
+  mastery_criteria: "5 consecutive strict reps each side"
+
+
+- id: hamstring-bridge
+  name: Hamstring Bridge
+  category: legs
+  difficulty: 2
+  status: mastered
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "10+ reps controlled"
+
+- id: nordic-hamstring-curl
+  name: Nordic Hamstring Curl
+  category: legs
+  difficulty: 5
+  status: locked
+  type: skill
+  requires: [hamstring-bridge]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Nordic (band/hands)
+      mastery_criteria: "5 controlled reps"
+    - name: Nordic Hamstring Curl
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ol-nordic-hamstring-curl
+  name: OL Nordic Hamstring Curl
+  category: legs
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [nordic-hamstring-curl]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: inv-nordic-hamstring-curl
+  name: Inv. Nordic Hamstring Curl
+  category: legs
+  difficulty: 7
+  status: locked
+  type: skill
+  requires: [ol-nordic-hamstring-curl]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: ol-inv-nordic-hamstring-curl
+  name: OL Inv. Nordic Hamstring Curl
+  category: legs
+  difficulty: 9
+  status: locked
+  type: skill
+  requires: [inv-nordic-hamstring-curl]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: elev-ol-nordic-hamstring-curl
+  name: Elev. OL Nordic Hamstring Curl
+  category: legs
+  difficulty: 10
+  status: locked
+  type: skill
+  requires: [ol-inv-nordic-hamstring-curl]
+  tutorials:
+    main: ""
+    alt: ""
+  mastery_criteria: "5 consecutive strict reps"
