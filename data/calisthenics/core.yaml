@@ -4,7 +4,6 @@
   name: Plank
   category: core
   difficulty: 1
-  status: mastered
   type: skill
   requires: []
   tutorials:
@@ -27,7 +26,6 @@
   name: L-Sit
   category: core
   difficulty: 4
-  status: unlocked
   type: skill
   requires: [plank]
   tutorials:
@@ -44,7 +42,6 @@
   name: Compressed L-Sit
   category: core
   difficulty: 6
-  status: locked
   type: skill
   requires: [l-sit]
   tutorials:
@@ -56,7 +53,6 @@
   name: V-Sit
   category: core
   difficulty: 7
-  status: locked
   type: skill
   requires: [compressed-l-sit]
   tutorials:
@@ -68,33 +64,28 @@
   name: Manna
   category: core
   difficulty: 10
-  status: locked
   type: skill
   requires: [v-sit]
   tutorials:
     main: "https://youtu.be/rX4zPm95dAY?t=5"
     alt: "https://www.youtube.com/playlist?list=PLHh3zEi0_nqeJlBi3-ezRbMj_F7UQcOlD"
   mastery_criteria: "5s clean hold"
-  notes: "Legendary skill"
 
 - id: todo-sit
   name: Todo-Sit
   category: core
   difficulty: 5
-  status: locked
   type: skill
   requires: [l-sit]
   tutorials:
     main: "https://youtu.be/eRDcHCSlyo4"
     alt: ""
   mastery_criteria: "10s clean hold"
-  notes: "TODO: overiť presný popis / video"
 
 - id: dragon-flag
   name: Dragon Flag
   category: core
   difficulty: 6
-  status: locked
   type: skill
   requires: [plank, push-up]
   tutorials:
@@ -119,7 +110,6 @@
   name: QA Dragon Flag
   category: core
   difficulty: 7
-  status: locked
   type: skill
   requires: [dragon-flag]
   tutorials:
@@ -131,7 +121,6 @@
   name: Dragon Press
   category: core
   difficulty: 8
-  status: locked
   type: skill
   requires: [qa-dragon-flag]
   tutorials:
@@ -154,7 +143,6 @@
   name: OA Dragon Press
   category: core
   difficulty: 9
-  status: locked
   type: skill
   requires: [dragon-press]
   tutorials:

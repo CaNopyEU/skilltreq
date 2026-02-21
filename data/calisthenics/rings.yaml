@@ -4,7 +4,6 @@
   name: Ring Push-Up
   category: rings
   difficulty: 3
-  status: mastered
   type: skill
   requires: [push-up]
   tutorials:
@@ -26,7 +25,6 @@
   abbr: Ring PU
   category: rings
   difficulty: 4
-  status: locked
   type: skill
   requires: [ring-push-up, pull-up]
   tutorials:
@@ -45,7 +43,6 @@
   name: Ring Turn Out
   category: rings
   difficulty: 4
-  status: locked
   type: skill
   requires: [ring-push-up]
   tutorials:
@@ -68,7 +65,6 @@
   name: Ring Flies
   category: rings
   difficulty: 6
-  status: locked
   type: skill
   requires: [ring-push-up]
   tutorials:
@@ -87,7 +83,6 @@
   name: Straight Arm Ring Flies
   category: rings
   difficulty: 8
-  status: locked
   type: skill
   requires: [ring-flies]
   tutorials:
@@ -106,7 +101,6 @@
   name: Ring Dip
   category: rings
   difficulty: 4
-  status: unlocked
   type: skill
   requires: [dip, ring-push-up]
   tutorials:
@@ -126,7 +120,6 @@
   abbr: Ring MU
   category: rings
   difficulty: 7
-  status: locked
   type: skill
   requires: [ring-dip, bar-mu]
   tutorials:
@@ -148,7 +141,6 @@
   abbr: Ring BI
   category: rings
   difficulty: 6
-  status: locked
   type: skill
   requires: [ring-mu]
   tutorials:
@@ -161,7 +153,6 @@
   abbr: Ring HS
   category: rings
   difficulty: 8
-  status: locked
   type: skill
   requires: [ring-bi, handstand]
   tutorials:
@@ -182,7 +173,6 @@
   name: Morozov
   category: rings
   difficulty: 9
-  status: locked
   type: skill
   requires: [ring-bi]
   tutorials:
@@ -199,7 +189,6 @@
   name: Ring Planche
   category: rings
   difficulty: 9
-  status: locked
   type: skill
   requires: [ring-bi, planche]
   tutorials:
@@ -211,7 +200,6 @@
   name: Ring Planche Press
   category: rings
   difficulty: 10
-  status: locked
   type: skill
   requires: [ring-planche]
   tutorials:
@@ -223,72 +211,61 @@
   name: Ring Maltese
   category: rings
   difficulty: 10
-  status: locked
   type: skill
   requires: [ring-planche, iron-cross]
   tutorials:
     main: "https://youtu.be/BREPvFm4ZNA?t=5"
     alt: "https://youtu.be/7AdMqt8i60E"
   mastery_criteria: "5s clean hold"
-  notes: "Legendary skill"
 
 - id: ring-victorian-cross
   name: Ring Victorian Cross
   category: rings
   difficulty: 10
-  status: locked
   type: skill
   requires: [ring-maltese]
   tutorials:
     main: "https://youtu.be/zNqNDhap-QQ?t=45"
     alt: "https://youtu.be/7AdMqt8i60E"
   mastery_criteria: "5s clean hold"
-  notes: "Legendary skill"
 
 - id: van-gelder
   name: Van Gelder
   category: rings
   difficulty: 10
-  status: locked
   type: skill
   requires: [ring-victorian-cross]
   tutorials:
     main: "https://youtu.be/--U_mgXrYbY?t=250"
     alt: "https://youtu.be/7AdMqt8i60E"
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary skill"
 
 - id: zanetti
   name: Zanetti
   category: rings
   difficulty: 10
-  status: locked
   type: skill
   requires: [van-gelder]
   tutorials:
     main: "https://youtu.be/sDqUD_oiDY4?t=31"
     alt: "https://youtu.be/7AdMqt8i60E"
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary skill"
 
 - id: carmona
   name: Carmona
   category: rings
   difficulty: 10
-  status: locked
   type: skill
   requires: [zanetti]
   tutorials:
     main: "https://youtu.be/sDqUD_oiDY4?t=100"
     alt: "https://youtu.be/7AdMqt8i60E"
   mastery_criteria: "1 controlled rep"
-  notes: "Legendary skill"
 
 - id: butterfly
   name: Butterfly
   category: rings
   difficulty: 6
-  status: locked
   type: skill
   requires: [ring-turn-out]
   tutorials:
@@ -301,7 +278,6 @@
   abbr: Inv. Butterfly
   category: rings
   difficulty: 8
-  status: locked
   type: skill
   requires: [butterfly]
   tutorials:
@@ -313,7 +289,6 @@
   name: Iron Cross
   category: rings
   difficulty: 8
-  status: locked
   type: skill
   requires: [ring-dip, ring-flies]
   tutorials:
@@ -334,7 +309,6 @@
   name: Iron Cross Press
   category: rings
   difficulty: 9
-  status: locked
   type: skill
   requires: [iron-cross]
   tutorials:
@@ -355,7 +329,6 @@
   name: Inverted Iron Cross
   category: rings
   difficulty: 9
-  status: locked
   type: skill
   requires: [iron-cross-press]
   tutorials:
@@ -373,7 +346,6 @@
   abbr: Wide Ring MU
   category: rings
   difficulty: 7
-  status: locked
   type: skill
   requires: [ring-mu]
   tutorials:
@@ -391,7 +363,6 @@
   abbr: Bulgarian Dip
   category: rings
   difficulty: 6
-  status: locked
   type: skill
   requires: [ring-dip]
   tutorials:

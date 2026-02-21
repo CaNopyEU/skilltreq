@@ -5,7 +5,6 @@
   name: Butterfly to Inv. Iron Cross
   abbr: Butterfly → Inv. IC
   difficulty: 8
-  status: locked
   type: transition
   requires: [butterfly, inverted-iron-cross]
   tutorials:
@@ -17,7 +16,6 @@
   name: Azarian to Iron Cross
   abbr: Azarian → IC
   difficulty: 9
-  status: locked
   type: transition
   requires: [butterfly, iron-cross]
   tutorials:
@@ -29,20 +27,17 @@
   name: Azarian to Planche/Maltese
   abbr: Azarian → Planche/Maltese
   difficulty: 10
-  status: locked
   type: transition
   requires: [azarian-to-ic, ring-maltese]
   tutorials:
     main: "https://youtu.be/DlAbv0fnBEg"
     alt: "https://youtu.be/7AdMqt8i60E?t=188"
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary transition"
 
 - id: fl-to-victorian-cross
   name: FL to Victorian Cross
   abbr: FL → Victorian Cross
   difficulty: 9
-  status: locked
   type: transition
   requires: [front-lever, ring-victorian-cross]
   tutorials:
@@ -54,7 +49,6 @@
   name: FL to Back Planche
   abbr: FL → BP
   difficulty: 9
-  status: locked
   type: transition
   requires: [front-lever, reverse-planche]
   tutorials:
@@ -66,33 +60,28 @@
   name: Victorian Cross to Back Planche
   abbr: Victorian Cross → BP
   difficulty: 10
-  status: locked
   type: transition
   requires: [fl-to-victorian-cross, fl-to-bp]
   tutorials:
     main: ""
     alt: ""
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary transition"
 
 - id: maltese-press-to-inv-ic
   name: Maltese Press to Inv. Iron Cross
   abbr: Maltese Press → Inv. IC
   difficulty: 10
-  status: locked
   type: transition
   requires: [ring-maltese, inverted-iron-cross]
   tutorials:
     main: "https://youtu.be/xHO3jP-eF_U?t=25"
     alt: "https://youtu.be/7AdMqt8i60E"
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary transition"
 
 - id: pb-fl-to-reverse-planche
   name: PB FL to Reverse Planche
   abbr: PB FL → Reverse Planche
   difficulty: 9
-  status: locked
   type: transition
   requires: [front-lever, reverse-planche]
   tutorials:
@@ -104,11 +93,9 @@
   name: FL to Victorian Cross (Rings)
   abbr: FL → Victorian Cross (R)
   difficulty: 10
-  status: locked
   type: transition
   requires: [front-lever, ring-victorian-cross]
   tutorials:
     main: ""
     alt: ""
   mastery_criteria: "3 controlled reps"
-  notes: "TODO: overiť či je to samostatný skill od fl-to-victorian-cross"

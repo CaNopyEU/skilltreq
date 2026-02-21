@@ -4,7 +4,6 @@
   name: Squat
   category: legs
   difficulty: 1
-  status: mastered
   type: skill
   requires: []
   tutorials:
@@ -21,7 +20,6 @@
   name: Pistol Squat
   category: legs
   difficulty: 4
-  status: unlocked
   type: skill
   requires: [squat]
   tutorials:
@@ -40,7 +38,6 @@
   name: Hawaiian Squat
   category: legs
   difficulty: 5
-  status: locked
   type: skill
   requires: [pistol-squat]
   tutorials:
@@ -57,7 +54,6 @@
   name: Sissy Squat
   category: legs
   difficulty: 5
-  status: locked
   type: skill
   requires: [hawaiian-squat]
   tutorials:
@@ -74,7 +70,6 @@
   name: OL Sissy Squat
   category: legs
   difficulty: 7
-  status: locked
   type: skill
   requires: [sissy-squat]
   tutorials:
@@ -91,7 +86,6 @@
   name: Elv. OL Sissy Squat
   category: legs
   difficulty: 8
-  status: locked
   type: skill
   requires: [ol-sissy-squat]
   tutorials:
@@ -108,7 +102,6 @@
   name: Shrimp Squat
   category: legs
   difficulty: 6
-  status: locked
   type: skill
   requires: [pistol-squat]
   tutorials:
@@ -126,7 +119,6 @@
   abbr: Elv. Shrimp Squat
   category: legs
   difficulty: 7
-  status: locked
   type: skill
   requires: [shrimp-squat]
   tutorials:
@@ -143,7 +135,6 @@
   name: Shrimp Squat Blaster
   category: legs
   difficulty: 9
-  status: locked
   type: skill
   requires: [elv-shrimp-squat]
   tutorials:
@@ -156,7 +147,6 @@
   abbr: Leg Ext. Lever
   category: legs
   difficulty: 5
-  status: locked
   type: skill
   requires: [squat]
   tutorials:
@@ -174,7 +164,6 @@
   abbr: OL Leg Ext. Lever
   category: legs
   difficulty: 7
-  status: locked
   type: skill
   requires: [leg-ext-lever]
   tutorials:
@@ -192,7 +181,6 @@
   abbr: Natural Leg Ext.
   category: legs
   difficulty: 6
-  status: locked
   type: skill
   requires: [leg-ext-lever]
   tutorials:
@@ -210,7 +198,6 @@
   abbr: OL Natural Leg Ext.
   category: legs
   difficulty: 8
-  status: locked
   type: skill
   requires: [natural-leg-ext]
   tutorials:
@@ -228,7 +215,6 @@
   abbr: Matrix Leg Ext.
   category: legs
   difficulty: 7
-  status: locked
   type: skill
   requires: [ol-natural-leg-ext]
   tutorials:
@@ -246,7 +232,6 @@
   abbr: OL Matrix Leg Ext.
   category: legs
   difficulty: 9
-  status: locked
   type: skill
   requires: [matrix-leg-ext]
   tutorials:
@@ -264,7 +249,6 @@
   abbr: Elv. OL Matrix Leg Ext.
   category: legs
   difficulty: 10
-  status: locked
   type: skill
   requires: [ol-matrix-leg-ext]
   tutorials:
@@ -282,7 +266,6 @@
   abbr: Elv. Matrix Leg Ext.
   category: legs
   difficulty: 9
-  status: locked
   type: skill
   requires: [matrix-leg-ext]
   tutorials:
@@ -299,7 +282,6 @@
   name: Natural Leg Press
   category: legs
   difficulty: 6
-  status: locked
   type: skill
   requires: [natural-leg-ext]
   tutorials:
@@ -316,7 +298,6 @@
   name: OL Natural Leg Press
   category: legs
   difficulty: 8
-  status: locked
   type: skill
   requires: [natural-leg-press]
   tutorials:
@@ -333,7 +314,6 @@
   name: Elv. OL Natural Leg Press
   category: legs
   difficulty: 9
-  status: locked
   type: skill
   requires: [ol-natural-leg-press]
   tutorials:
@@ -351,7 +331,6 @@
   name: Hamstring Bridge
   category: legs
   difficulty: 2
-  status: mastered
   type: skill
   requires: []
   tutorials:
@@ -363,7 +342,6 @@
   name: Nordic Hamstring Curl
   category: legs
   difficulty: 5
-  status: locked
   type: skill
   requires: [hamstring-bridge]
   tutorials:
@@ -380,7 +358,6 @@
   name: OL Nordic Hamstring Curl
   category: legs
   difficulty: 7
-  status: locked
   type: skill
   requires: [nordic-hamstring-curl]
   tutorials:
@@ -392,7 +369,6 @@
   name: Inv. Nordic Hamstring Curl
   category: legs
   difficulty: 7
-  status: locked
   type: skill
   requires: [ol-nordic-hamstring-curl]
   tutorials:
@@ -404,7 +380,6 @@
   name: OL Inv. Nordic Hamstring Curl
   category: legs
   difficulty: 9
-  status: locked
   type: skill
   requires: [inv-nordic-hamstring-curl]
   tutorials:
@@ -416,7 +391,6 @@
   name: Elev. OL Nordic Hamstring Curl
   category: legs
   difficulty: 10
-  status: locked
   type: skill
   requires: [ol-inv-nordic-hamstring-curl]
   tutorials:

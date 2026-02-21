@@ -4,7 +4,6 @@
   name: Push-Up
   category: push
   difficulty: 2
-  status: mastered
   type: skill
   requires: []
   tutorials:
@@ -33,7 +32,6 @@
   name: OA Push-Up
   category: push
   difficulty: 7
-  status: locked
   type: skill
   requires: [push-up]
   tutorials:
@@ -56,7 +54,6 @@
   name: Planche Lean
   category: push
   difficulty: 4
-  status: unlocked
   type: skill
   requires: [push-up]
   tutorials:
@@ -80,7 +77,6 @@
   abbr: Pseudo PU
   category: push
   difficulty: 5
-  status: unlocked
   type: skill
   requires: [planche-lean]
   tutorials:
@@ -99,7 +95,6 @@
   name: Planche
   category: push
   difficulty: 9
-  status: in_progress
   type: skill
   requires: [pseudo-pu]
   tutorials:
@@ -122,14 +117,12 @@
       mastery_criteria: "3s hold"
     - name: Straight Bar Planche
       mastery_criteria: "3s hold"
-  current_step: 0
   mastery_criteria: "5s clean hold"
 
 - id: planche-push-up
   name: Planche Push-Up
   category: push
   difficulty: 9
-  status: locked
   type: skill
   requires: [planche]
   tutorials:
@@ -154,7 +147,6 @@
   name: Bicep Planche
   category: push
   difficulty: 9
-  status: locked
   type: skill
   requires: [planche-push-up]
   tutorials:
@@ -171,7 +163,6 @@
   name: OA Bicep Planche
   category: push
   difficulty: 10
-  status: locked
   type: skill
   requires: [bicep-planche]
   tutorials:
@@ -188,7 +179,6 @@
   name: QA Planche
   category: push
   difficulty: 9
-  status: locked
   type: skill
   requires: [planche]
   tutorials:
@@ -200,7 +190,6 @@
   name: QA Planche Push-Up
   category: push
   difficulty: 10
-  status: locked
   type: skill
   requires: [qa-planche]
   tutorials:
@@ -212,7 +201,6 @@
   name: OA Planche
   category: push
   difficulty: 10
-  status: locked
   type: skill
   requires: [qa-planche]
   tutorials:
@@ -231,20 +219,17 @@
   name: Planche Press
   category: push
   difficulty: 10
-  status: locked
   type: skill
   requires: [planche, maltese-press]
   tutorials:
     main: "https://youtu.be/wD3Mk7WSTgc"
     alt: "https://youtu.be/sa4vKNEWKQ0"
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary skill"
 
 - id: maltese-press
   name: Maltese Press
   category: push
   difficulty: 10
-  status: locked
   type: skill
   requires: [planche, ring-maltese]
   tutorials:
@@ -260,13 +245,11 @@
     - name: Maltese Press
       mastery_criteria: "3 controlled reps"
   mastery_criteria: "3 controlled reps"
-  notes: "Legendary skill"
 
 - id: reverse-planche
   name: Reverse Planche
   category: push
   difficulty: 8
-  status: locked
   type: skill
   requires: [planche]
   tutorials:
@@ -285,7 +268,6 @@
   name: Dip
   category: push
   difficulty: 3
-  status: mastered
   type: skill
   requires: [push-up]
   tutorials:
@@ -310,7 +292,6 @@
   name: OA Dip
   category: push
   difficulty: 7
-  status: locked
   type: skill
   requires: [dip]
   tutorials:
@@ -330,7 +311,6 @@
   abbr: Imp. Dip
   category: push
   difficulty: 8
-  status: locked
   type: skill
   requires: [dip]
   tutorials:
@@ -355,7 +335,6 @@
   name: Bulgarian Dip
   category: push
   difficulty: 6
-  status: locked
   type: skill
   requires: [dip]
   tutorials:
@@ -373,7 +352,6 @@
   abbr: HS
   category: push
   difficulty: 6
-  status: in_progress
   type: skill
   requires: [push-up]
   tutorials:
@@ -394,7 +372,6 @@
       mastery_criteria: "10s hold"
     - name: X Handstand
       mastery_criteria: "5s hold"
-  current_step: 1
   mastery_criteria: "60s freestanding hold"
 
 - id: wall-hs
@@ -402,7 +379,6 @@
   abbr: Wall HS
   category: push
   difficulty: 4
-  status: unlocked
   type: skill
   requires: [push-up]
   tutorials:
@@ -424,7 +400,6 @@
   abbr: HS Push-Up
   category: push
   difficulty: 7
-  status: locked
   type: skill
   requires: [handstand]
   tutorials:
@@ -455,7 +430,6 @@
   name: HS Pike Press
   category: push
   difficulty: 8
-  status: locked
   type: skill
   requires: [hs-push-up]
   tutorials:
@@ -476,7 +450,6 @@
   name: OA HS Press
   category: push
   difficulty: 9
-  status: locked
   type: skill
   requires: [hs-pike-press]
   tutorials:
@@ -489,20 +462,17 @@
   abbr: OA HS
   category: push
   difficulty: 10
-  status: locked
   type: skill
   requires: [oa-hs-press]
   tutorials:
     main: "https://youtu.be/lVqDPymzcDQ?t=18"
     alt: "https://youtu.be/UE9Tn08BZBA"
   mastery_criteria: "5s freestanding hold"
-  notes: "Legendary skill"
 
 - id: imp-tigerbend-hs-push-up
   name: Imp. Tigerbend HS Push-Up
   category: push
   difficulty: 8
-  status: locked
   type: skill
   requires: [handstand, hs-push-up]
   tutorials:

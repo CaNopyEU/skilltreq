@@ -4,7 +4,6 @@
   name: Pull-Up
   category: pull
   difficulty: 3
-  status: mastered
   type: skill
   requires: []
   tutorials:
@@ -31,7 +30,6 @@
   name: Chin-Up
   category: pull
   difficulty: 2
-  status: mastered
   type: skill
   requires: [pull-up]
   tutorials:
@@ -43,7 +41,6 @@
   name: OA Chin-Up
   category: pull
   difficulty: 6
-  status: locked
   type: skill
   requires: [chin-up]
   tutorials:
@@ -64,7 +61,6 @@
   name: OA Pull-Up
   category: pull
   difficulty: 7
-  status: locked
   type: skill
   requires: [oa-chin-up]
   tutorials:
@@ -90,7 +86,6 @@
   abbr: Bar MU
   category: pull
   difficulty: 6
-  status: in_progress
   type: skill
   requires: [pull-up]
   tutorials:
@@ -111,7 +106,6 @@
       mastery_criteria: "5 reps"
     - name: Bar Muscle-Up
       mastery_criteria: "5 consecutive strict reps"
-  current_step: 2
   mastery_criteria: "5 consecutive strict reps"
 
 - id: wide-ring-mu
@@ -119,7 +113,6 @@
   abbr: Wide Ring MU
   category: pull
   difficulty: 7
-  status: locked
   type: skill
   requires: [bar-mu]
   tutorials:
@@ -136,7 +129,6 @@
   name: OA MU no Armpit
   category: pull
   difficulty: 9
-  status: locked
   type: skill
   requires: [oa-pull-up, wide-ring-mu]
   tutorials:
@@ -149,7 +141,6 @@
   abbr: FL
   category: pull
   difficulty: 7
-  status: in_progress
   type: skill
   requires: [pull-up]
   tutorials:
@@ -178,14 +169,12 @@
       mastery_criteria: "5s hold"
     - name: Wide FL
       mastery_criteria: "5s hold"
-  current_step: 0
   mastery_criteria: "10s clean hold"
 
 - id: front-lever-pull
   name: Front Lever Pull
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [front-lever]
   tutorials:
@@ -210,7 +199,6 @@
   name: Front Lever Pull-Up
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [front-lever-pull]
   tutorials:
@@ -235,7 +223,6 @@
   name: OA Front Lever
   category: pull
   difficulty: 9
-  status: locked
   type: skill
   requires: [front-lever-pull]
   tutorials:
@@ -253,7 +240,6 @@
   abbr: OA FL PU
   category: pull
   difficulty: 10
-  status: locked
   type: skill
   requires: [oa-front-lever, front-lever-pull-up]
   tutorials:
@@ -265,7 +251,6 @@
   name: QA Front Lever
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [front-lever]
   tutorials:
@@ -277,7 +262,6 @@
   name: Floor Victorian
   category: pull
   difficulty: 9
-  status: locked
   type: skill
   requires: [qa-front-lever]
   tutorials:
@@ -294,7 +278,6 @@
   name: PB Victorian
   category: pull
   difficulty: 10
-  status: locked
   type: skill
   requires: [floor-victorian]
   tutorials:
@@ -316,7 +299,6 @@
   abbr: BL
   category: pull
   difficulty: 6
-  status: unlocked
   type: skill
   requires: [pull-up]
   tutorials:
@@ -345,7 +327,6 @@
   name: Pelikan
   category: pull
   difficulty: 7
-  status: locked
   type: skill
   requires: [back-lever]
   tutorials:
@@ -357,7 +338,6 @@
   name: Back Lever Pull-Up
   category: pull
   difficulty: 7
-  status: locked
   type: skill
   requires: [back-lever]
   tutorials:
@@ -380,7 +360,6 @@
   name: QA Back Lever Pull-Up
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [back-lever-pull-up]
   tutorials:
@@ -392,7 +371,6 @@
   name: OA Back Lever
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [back-lever-pull-up]
   tutorials:
@@ -404,7 +382,6 @@
   name: OA Back Lever Pull-Up
   category: pull
   difficulty: 9
-  status: locked
   type: skill
   requires: [oa-back-lever]
   tutorials:
@@ -422,7 +399,6 @@
   abbr: Hefesto BL
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [back-lever, imp-tigerbend-hs-push-up]
   tutorials:
@@ -443,7 +419,6 @@
   name: Hefesto
   category: pull
   difficulty: 8
-  status: locked
   type: skill
   requires: [hefesto-from-bl]
   tutorials:
@@ -468,7 +443,6 @@
   name: OA Hefesto
   category: pull
   difficulty: 9
-  status: locked
   type: skill
   requires: [hefesto]
   tutorials:
@@ -485,7 +459,6 @@
   name: QA Hefesto from BL
   category: pull
   difficulty: 9
-  status: locked
   type: skill
   requires: [oa-hefesto]
   tutorials:
