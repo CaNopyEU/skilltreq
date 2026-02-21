@@ -1,10 +1,13 @@
 import dagre from '@dagrejs/dagre'
+import { Position } from '@vue-flow/core'
 import type { Skill } from '../db/schema'
 
 export interface GraphNode {
   id: string
   type: string
   position: { x: number; y: number }
+  sourcePosition: Position
+  targetPosition: Position
   data: { skill: Skill }
 }
 
@@ -42,12 +45,17 @@ export function useGraphLayout() {
 
     dagre.layout(g)
 
+    const sourcePos = direction === 'LR' ? Position.Right : Position.Bottom
+    const targetPos = direction === 'LR' ? Position.Left : Position.Top
+
     const nodes: GraphNode[] = skills.map((skill) => {
       const node = g.node(skill.id)
       return {
         id: skill.id,
         type: 'skill',
         position: { x: node.x - NODE_W / 2, y: node.y - NODE_H / 2 },
+        sourcePosition: sourcePos,
+        targetPosition: targetPos,
         data: { skill },
       }
     })

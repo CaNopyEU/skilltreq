@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Handle, Position, type NodeProps } from '@vue-flow/core'
+import { Handle, type NodeProps } from '@vue-flow/core'
 import type { Category, Skill } from '../../db/schema'
 import { useProgressStore } from '../../stores/useProgressStore'
 import { useSkillStore } from '../../stores/useSkillStore'
@@ -51,6 +51,7 @@ const nodeOpacity = computed(() => {
   return 1
 })
 
+
 const totalSteps = computed(() => props.data.skill.progressions?.length ?? 0)
 const fillWidth = computed(() => {
   if (totalSteps.value === 0) return '0%'
@@ -80,7 +81,7 @@ const categoryIcon = computed(() => {
     }"
     :style="{ background: bgColor, borderColor, boxShadow: glowShadow, opacity: nodeOpacity }"
   >
-    <Handle type="target" :position="Position.Top" />
+    <Handle type="target" :position="props.targetPosition" />
 
     <div v-if="totalSteps > 0" class="skill-node__fill" :style="{ width: fillWidth, backgroundColor: fillColor }" />
 
@@ -90,7 +91,7 @@ const categoryIcon = computed(() => {
 
     <div class="skill-node__category-bar" :style="{ backgroundColor: categoryHex }" />
 
-    <Handle type="source" :position="Position.Bottom" />
+    <Handle type="source" :position="props.sourcePosition" />
   </div>
 </template>
 

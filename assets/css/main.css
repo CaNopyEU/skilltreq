@@ -81,7 +81,7 @@
   --status-mastered-glow: rgba(251, 191, 36, 0.55);
 
   /* Focus system */
-  --focus-shadow: 0 0 0 2px rgba(91, 156, 246, 0.6), 0 0 24px rgba(91, 156, 246, 0.5);
+  --focus-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 0 20px rgba(180, 210, 255, 0.45);
 
   /* Surfaces */
   --bg-page: #08080e;

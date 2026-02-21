@@ -32,7 +32,7 @@ describe('resolveEdgeVariant', () => {
   describe('completed parent', () => {
     const parent: NodeStatus = 'completed'
     const cases: [NodeStatus, EdgeVariant][] = [
-      ['locked', 'in_progress'],
+      ['locked', 'locked_solid'],
       ['in_progress', 'in_progress'],
       ['completed', 'completed'],
       ['mastered', 'in_progress'],
@@ -45,7 +45,7 @@ describe('resolveEdgeVariant', () => {
   describe('mastered parent', () => {
     const parent: NodeStatus = 'mastered'
     const cases: [NodeStatus, EdgeVariant][] = [
-      ['locked', 'in_progress'],
+      ['locked', 'locked_solid'],
       ['in_progress', 'in_progress'],
       ['completed', 'mastered_to_completed'],
       ['mastered', 'mastered'],

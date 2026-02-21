@@ -55,11 +55,11 @@ function toggleCategory(id: string) {
   }
 }
 
-const statusLabels: Record<ProgressStatus, string> = {
-  locked: '🔒',
-  in_progress: '🔵',
-  completed: '✅',
-  mastered: '⭐',
+const statusIconName: Record<ProgressStatus, 'lock-closed' | 'bolt' | 'check-circle' | 'star'> = {
+  locked: 'lock-closed',
+  in_progress: 'bolt',
+  completed: 'check-circle',
+  mastered: 'star',
 }
 </script>
 
@@ -73,7 +73,11 @@ const statusLabels: Record<ProgressStatus, string> = {
       >
         <span>{{ group.category.name }}</span>
         <span class="skill-list__count">{{ group.skills.length }}</span>
-        <span class="skill-list__chevron">{{ openCategories.has(group.category.id) ? '▲' : '▼' }}</span>
+        <HIcon
+          :name="openCategories.has(group.category.id) ? 'chevron-up' : 'chevron-down'"
+          :size="12"
+          class="skill-list__chevron"
+        />
       </button>
 
       <div v-if="openCategories.has(group.category.id)" class="skill-list__items">
@@ -92,7 +96,7 @@ const statusLabels: Record<ProgressStatus, string> = {
             }"
           />
           <span class="skill-list__status">
-            {{ statusLabels[progressStore.getProgress(skill.id).status] }}
+            <HIcon :name="statusIconName[progressStore.getProgress(skill.id).status]" :size="14" />
           </span>
           <span class="skill-list__name">{{ skill.name }}</span>
           <span class="skill-list__diff">D{{ skill.difficulty }}</span>

@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export type ProgressStatus = 'locked' | 'in_progress' | 'completed' | 'mastered'
@@ -45,7 +46,7 @@ export const useProgressStore = defineStore('progress', () => {
   function setStatus(skillId: string, status: ProgressStatus, totalSteps = 0) {
     const current = getProgress(skillId)
     let current_step = current.current_step
-    if (status === 'mastered') current_step = totalSteps
+    if (status === 'mastered' || status === 'completed') current_step = totalSteps
     else if (status === 'locked') current_step = 0
     data.value.skills[skillId] = { ...current, status, current_step }
     saveToStorage(data.value)

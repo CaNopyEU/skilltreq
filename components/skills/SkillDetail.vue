@@ -28,8 +28,11 @@ const statusLabel: Record<ProgressStatus, string> = {
   completed: 'Completed',
   mastered: 'Mastered',
 }
-const statusIcon: Record<ProgressStatus, string> = {
-  locked: '○', in_progress: '◉', completed: '✓', mastered: '★',
+const statusIconName: Record<ProgressStatus, 'lock-closed' | 'bolt' | 'check-circle' | 'star'> = {
+  locked: 'lock-closed',
+  in_progress: 'bolt',
+  completed: 'check-circle',
+  mastered: 'star',
 }
 
 // Progress
@@ -167,9 +170,12 @@ function onMasteryConfirm() {
         <span class="drawer__cat-icon">{{ categoryIcon }}</span>
         <h2 class="drawer__title">{{ skill.name }}</h2>
         <span class="drawer__badge" :data-status="progress.status">
-          {{ statusIcon[progress.status] }} {{ statusLabel[progress.status] }}
+          <HIcon :name="statusIconName[progress.status]" :size="11" />
+          {{ statusLabel[progress.status] }}
         </span>
-        <button class="drawer__close" @click="emit('close')">✕</button>
+        <button class="drawer__close" @click="emit('close')">
+          <HIcon name="x-mark" :size="16" />
+        </button>
       </div>
 
       <!-- Category micro bar -->
@@ -207,7 +213,7 @@ function onMasteryConfirm() {
           >
             <span class="drawer__step-num">
               {{ i + 1 }}
-              <span v-if="i === totalSteps - 1" class="drawer__step-final-mark">★</span>
+              <HIcon v-if="i === totalSteps - 1" name="star" :size="9" class="drawer__step-final-mark" />
             </span>
             <span class="drawer__step-body">
               <span class="drawer__step-name">{{ prog.name }}</span>
@@ -224,7 +230,7 @@ function onMasteryConfirm() {
           title="Double-click na prechod do Mastered"
           @dblclick="onMasteryDblClick"
         >
-          <span class="drawer__mastery-prompt-icon">★</span>
+          <HIcon name="star" :size="20" class="drawer__mastery-prompt-icon" />
           <span class="drawer__mastery-prompt-text">
             <span class="drawer__mastery-prompt-label">Mastery dostupné</span>
             <span v-if="skill.masteryCriteria" class="drawer__mastery-prompt-crit">{{ skill.masteryCriteria }}</span>
@@ -235,7 +241,9 @@ function onMasteryConfirm() {
 
       <!-- Mastered: badge + criteria -->
       <section v-if="progress.status === 'mastered'" class="drawer__section">
-        <div class="drawer__mastered-chip">★ Mastered</div>
+        <div class="drawer__mastered-chip">
+          <HIcon name="star" :size="14" /> Mastered
+        </div>
         <p v-if="skill.masteryCriteria" class="drawer__mastery-crit">{{ skill.masteryCriteria }}</p>
       </section>
 
@@ -262,7 +270,7 @@ function onMasteryConfirm() {
           >
             <span class="drawer__rel-dot" :data-status="p.status" />
             <span class="drawer__rel-name">{{ p.skill.name }}</span>
-            <span class="drawer__rel-arrow">→</span>
+            <HIcon name="arrow-right" :size="12" class="drawer__rel-arrow" />
           </button>
         </div>
       </section>
@@ -280,7 +288,7 @@ function onMasteryConfirm() {
           >
             <span class="drawer__rel-dot" :data-status="c.status" />
             <span class="drawer__rel-name">{{ c.skill.name }}</span>
-            <span class="drawer__rel-arrow">→</span>
+            <HIcon name="arrow-right" :size="12" class="drawer__rel-arrow" />
           </button>
         </div>
       </section>
@@ -290,10 +298,10 @@ function onMasteryConfirm() {
         <label class="drawer__label">Tutorials</label>
         <div class="drawer__links">
           <a v-if="skill.tutorials?.main" :href="skill.tutorials.main" target="_blank" class="drawer__link">
-            Main ↗
+            Main <HIcon name="arrow-top-right-on-square" :size="12" />
           </a>
           <a v-if="skill.tutorials?.alt" :href="skill.tutorials.alt" target="_blank" class="drawer__link">
-            Alt ↗
+            Alt <HIcon name="arrow-top-right-on-square" :size="12" />
           </a>
         </div>
       </div>
@@ -437,11 +445,11 @@ function onMasteryConfirm() {
 .drawer__close {
   background: none;
   border: none;
-  font-size: 16px;
   cursor: pointer;
   color: var(--text-muted);
   padding: 0 2px;
-  line-height: 1;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
   transition: color 0.12s;
 }
@@ -623,7 +631,6 @@ function onMasteryConfirm() {
 }
 
 .drawer__mastery-prompt-icon {
-  font-size: 18px;
   color: var(--status-mastered);
   flex-shrink: 0;
 }
@@ -753,8 +760,8 @@ function onMasteryConfirm() {
 .drawer__rel-name { flex: 1; }
 
 .drawer__rel-arrow {
-  font-size: 11px;
   color: var(--text-faint);
+  flex-shrink: 0;
 }
 
 /* ── Tutorials ── */

@@ -3,6 +3,7 @@ import { getBezierPath, type EdgeProps } from '@vue-flow/core'
 import { type Ref } from 'vue'
 import { useProgressStore } from '../../stores/useProgressStore'
 import { useFocusState } from '../../composables/useFocusState'
+import { resolveEdgeVariant } from '../../utils/resolveEdgeVariant'
 
 const props = defineProps<EdgeProps>()
 const progressStore = useProgressStore()
@@ -27,21 +28,32 @@ function statusVar(status: string) {
 const sourceStatus = computed(() => progressStore.getProgress(props.source).status)
 const targetStatus = computed(() => progressStore.getProgress(props.target).status)
 
+const variant = computed(() => resolveEdgeVariant(sourceStatus.value, targetStatus.value))
+
+const gradientId = computed(() => `mtc-grad-${props.id}`)
+
 const strokeColor = computed(() => {
-  if (targetStatus.value === 'in_progress') return 'var(--status-in-progress)'
-  if (sourceStatus.value === 'mastered') return 'var(--status-mastered)'
-  if (sourceStatus.value === 'completed') return 'var(--status-completed)'
-  return 'var(--status-locked)'
+  switch (variant.value) {
+    case 'locked_dashed':
+    case 'locked_solid':       return 'var(--status-locked)'
+    case 'in_progress':        return 'var(--status-in-progress)'
+    case 'completed':          return 'var(--status-completed)'
+    case 'mastered':           return 'var(--status-mastered)'
+    case 'mastered_to_completed': return `url(#${gradientId.value})`
+  }
 })
 
 // Energy particle when flowing INTO an in_progress skill
 const isActive = computed(() => targetStatus.value === 'in_progress')
 
-// Mastered edge shimmer: source is mastered, no active particle
-const isMasteredEdge = computed(() => sourceStatus.value === 'mastered' && !isActive.value)
+// Mastered edge: gold shimmer pulse (mastered→mastered or mastered→in_progress)
+const isMasteredEdge = computed(() => variant.value === 'mastered' && !isActive.value)
 
-// Dashed only when prerequisite is locked
-const isDashed = computed(() => sourceStatus.value === 'locked')
+// Gradient edge: mastered parent → completed child
+const isMasteredToCompleted = computed(() => variant.value === 'mastered_to_completed')
+
+// Dashed only for locked parent
+const isDashed = computed(() => variant.value === 'locked_dashed')
 
 // Focus relationship
 const isParentEdge = computed(() => focusedSkillId.value !== null && props.target === focusedSkillId.value)
@@ -65,17 +77,30 @@ const strokeOpacity = computed(() => {
     if (isInFocus.value) return isParentEdge.value ? 1.0 : 0.9
     return 0.1
   }
-  if (sourceStatus.value === 'locked') return 0.25
+  if (variant.value === 'locked_dashed') return 0.25
+  if (variant.value === 'locked_solid') return 0.4
   if (isActive.value) return 0.35
-  if (isMasteredEdge.value) return 0.6  // base; animate overrides this
-  return 0.6  // completed
+  return 0.6  // completed, mastered, mastered_to_completed — animate overrides for mastered
+})
+
+// Particle speed in px/s — constant regardless of edge length
+const PARTICLE_SPEED = 120 // px/s base
+const PARTICLE_SPEED_BRANCH = 150
+const PARTICLE_SPEED_FOCUS = 190
+
+// Straight-line distance between endpoints (proportional to Bezier path length)
+const edgeDistance = computed(() => {
+  const dx = props.targetX - props.sourceX
+  const dy = props.targetY - props.sourceY
+  return Math.sqrt(dx * dx + dy * dy)
 })
 
 // SMIL dur is a presentation attribute — CSS var() is not supported, use literal strings
 const energyDuration = computed(() => {
-  if (isInFocus.value) return '1.7s'
-  if (isFocusActive.value) return '2s'
-  return '2.6s'
+  const dist = Math.max(40, edgeDistance.value) // floor to avoid sub-frame durations
+  if (isInFocus.value) return `${(dist / PARTICLE_SPEED_FOCUS).toFixed(2)}s`
+  if (isFocusActive.value) return `${(dist / PARTICLE_SPEED_BRANCH).toFixed(2)}s`
+  return `${(dist / PARTICLE_SPEED).toFixed(2)}s`
 })
 
 // Unique ID for <mpath> reference
@@ -84,27 +109,28 @@ const mpathId = computed(() => `ep-${props.id}`)
 
 <template>
   <g>
+    <!-- Gradient def for mastered_to_completed edge -->
+    <defs v-if="isMasteredToCompleted">
+      <linearGradient
+        :id="gradientId"
+        gradientUnits="userSpaceOnUse"
+        :x1="props.sourceX" :y1="props.sourceY"
+        :x2="props.targetX" :y2="props.targetY"
+      >
+        <stop offset="0%" stop-color="var(--status-mastered)" />
+        <stop offset="100%" stop-color="var(--status-completed)" />
+      </linearGradient>
+    </defs>
+
     <!--
       Invisible path used as the motion track for <mpath>.
       Must be in the same SVG as the animateMotion elements.
     -->
     <path :id="mpathId" :d="pathData" fill="none" stroke="none" />
 
-    <!-- ── Regular base line ── -->
-    <path
-      v-if="!isMasteredEdge"
-      :d="pathData"
-      fill="none"
-      :stroke="strokeColor"
-      :stroke-width="strokeWidth"
-      :stroke-opacity="strokeOpacity"
-      :stroke-dasharray="isDashed ? '4 6' : 'none'"
-      :marker-end="markerEnd"
-    />
-
     <!-- ── Mastered line — solid gold with shimmer pulse ── -->
     <path
-      v-else
+      v-if="isMasteredEdge"
       :d="pathData"
       fill="none"
       :stroke="strokeColor"
@@ -114,6 +140,31 @@ const mpathId = computed(() => `ep-${props.id}`)
     >
       <animate attributeName="stroke-opacity" values="0.4;0.85;0.4" dur="3s" repeatCount="indefinite" />
     </path>
+
+    <!-- ── Mastered→Completed gradient line with subtle pulse ── -->
+    <path
+      v-else-if="isMasteredToCompleted"
+      :d="pathData"
+      fill="none"
+      :stroke="strokeColor"
+      :stroke-width="strokeWidth"
+      stroke-opacity="0.55"
+      :marker-end="markerEnd"
+    >
+      <animate attributeName="stroke-opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite" />
+    </path>
+
+    <!-- ── Regular base line ── -->
+    <path
+      v-else
+      :d="pathData"
+      fill="none"
+      :stroke="strokeColor"
+      :stroke-width="strokeWidth"
+      :stroke-opacity="strokeOpacity"
+      :stroke-dasharray="isDashed ? '4 6' : 'none'"
+      :marker-end="markerEnd"
+    />
 
     <!-- ── Electric particle — edges flowing into in_progress skills ── -->
     <template v-if="isActive && !graphIsPaused">

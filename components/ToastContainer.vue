@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { useToast } from '../composables/useToast'
+import { useToast, type ToastType } from '../composables/useToast'
+import type { IconName } from './HIcon.vue'
 
 const { toasts, remove } = useToast()
 
-const icons: Record<string, string> = {
-  success: '✓',
-  error: '✕',
-  info: 'ℹ',
-  warning: '⚠',
+const iconName: Record<ToastType, IconName> = {
+  success: 'check-circle',
+  error: 'x-circle',
+  info: 'information-circle',
+  warning: 'exclamation-triangle',
 }
 </script>
 
@@ -23,7 +24,7 @@ const icons: Record<string, string> = {
           role="status"
           @click="remove(toast.id)"
         >
-          <span class="toast__icon">{{ icons[toast.type] }}</span>
+          <HIcon :name="iconName[toast.type]" :size="16" class="toast__icon" />
           <span class="toast__msg">{{ toast.message }}</span>
         </div>
       </TransitionGroup>

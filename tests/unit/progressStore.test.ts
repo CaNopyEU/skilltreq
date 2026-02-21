@@ -40,8 +40,9 @@ describe('progressStore integration', () => {
     )
 
     // Prime the computed (first read sets up tracking)
+    // completed → locked = locked_solid (rule: any non-locked parent → locked child)
     const initial = edgeAB.value
-    expect(initial).toBe('in_progress')
+    expect(initial).toBe('locked_solid')
 
     spy.mockClear()
 
@@ -49,8 +50,9 @@ describe('progressStore integration', () => {
     store.setStatus('A', 'mastered')
 
     // Read to trigger recomputation
+    // mastered → locked = locked_solid (same rule)
     const updated = edgeAB.value
-    expect(updated).toBe('in_progress')
+    expect(updated).toBe('locked_solid')
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
