@@ -94,7 +94,7 @@ const emit = defineEmits<{
 
 .prereq-modal__dot[data-status='locked'] { background: var(--status-locked); }
 .prereq-modal__dot[data-status='in_progress'] { background: var(--status-in-progress); }
-.prereq-modal__dot[data-status='unlocked'] { background: var(--status-unlocked); }
+.prereq-modal__dot[data-status='completed'] { background: var(--status-completed); }
 .prereq-modal__dot[data-status='mastered'] { background: var(--status-mastered); }
 
 .prereq-modal__actions {

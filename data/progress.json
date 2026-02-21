@@ -6,20 +6,20 @@
     "chin-up":        { "status": "mastered" },
     "bar-mu":         { "status": "in_progress", "current_step": 2 },
     "front-lever":    { "status": "in_progress", "current_step": 0 },
-    "back-lever":     { "status": "unlocked" },
+    "back-lever":     { "status": "completed" },
     "hamstring-bridge": { "status": "mastered" },
     "push-up":        { "status": "mastered" },
-    "planche-lean":   { "status": "unlocked" },
-    "pseudo-pu":      { "status": "unlocked" },
+    "planche-lean":   { "status": "completed" },
+    "pseudo-pu":      { "status": "completed" },
     "planche":        { "status": "in_progress", "current_step": 0 },
     "dip":            { "status": "mastered" },
     "handstand":      { "status": "in_progress", "current_step": 1 },
-    "wall-hs":        { "status": "unlocked" },
+    "wall-hs":        { "status": "completed" },
     "plank":          { "status": "mastered" },
-    "l-sit":          { "status": "unlocked" },
+    "l-sit":          { "status": "completed" },
     "squat":          { "status": "mastered" },
-    "pistol-squat":   { "status": "unlocked" },
+    "pistol-squat":   { "status": "completed" },
     "ring-push-up":   { "status": "mastered" },
-    "ring-dip":       { "status": "unlocked" }
+    "ring-dip":       { "status": "completed" }
   }
 }

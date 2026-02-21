@@ -58,7 +58,7 @@ function toggleCategory(id: string) {
 const statusLabels: Record<ProgressStatus, string> = {
   locked: '🔒',
   in_progress: '🔵',
-  unlocked: '✅',
+  completed: '✅',
   mastered: '⭐',
 }
 </script>

@@ -24,7 +24,7 @@ const proposed = {
     status: [
       { token: '--status-locked',      hex: '#3c3c58', label: 'Locked',      emoji: '🔒' },
       { token: '--status-in-progress', hex: '#5b9cf6', label: 'In Progress',  emoji: '◉' },
-      { token: '--status-unlocked',    hex: '#4ade80', label: 'Unlocked',     emoji: '✓' },
+      { token: '--status-completed',    hex: '#4ade80', label: 'Completed',    emoji: '✓' },
       { token: '--status-mastered',    hex: '#f0b429', label: 'Mastered',     emoji: '★' },
     ],
     accents: [
@@ -54,7 +54,7 @@ const proposed = {
     status: [
       { token: '--status-locked',      hex: '#9090b0', label: 'Locked',      emoji: '🔒' },
       { token: '--status-in-progress', hex: '#3b82f6', label: 'In Progress',  emoji: '◉' },
-      { token: '--status-unlocked',    hex: '#22c55e', label: 'Unlocked',     emoji: '✓' },
+      { token: '--status-completed',    hex: '#22c55e', label: 'Completed',    emoji: '✓' },
       { token: '--status-mastered',    hex: '#f59e0b', label: 'Mastered',     emoji: '★' },
     ],
     accents: [
@@ -71,7 +71,7 @@ const proposed = {
 const neonColors = [
   { hex: '#818cf8', label: 'Locked',      emoji: '🔒', desc: 'indigo-400' },
   { hex: '#22d3ee', label: 'In Progress', emoji: '◉',  desc: 'cyan-400' },
-  { hex: '#4ade80', label: 'Unlocked',    emoji: '✓',  desc: 'green-400' },
+  { hex: '#4ade80', label: 'Completed',    emoji: '✓',  desc: 'green-400' },
   { hex: '#fbbf24', label: 'Mastered',    emoji: '★',  desc: 'amber-400' },
 ]
 
@@ -79,7 +79,7 @@ const neonColors = [
 const glowColors = [
   { hex: '#5b9cf6', glow: '#5b9cf6', label: 'Locked',      emoji: '🔒' },
   { hex: '#5b9cf6', glow: '#5b9cf6', label: 'In Progress',  emoji: '◉' },
-  { hex: '#4ade80', glow: '#4ade80', label: 'Unlocked',     emoji: '✓' },
+  { hex: '#4ade80', glow: '#4ade80', label: 'Completed',     emoji: '✓' },
   { hex: '#f0b429', glow: '#f0b429', label: 'Mastered',     emoji: '★' },
 ]
 
@@ -87,7 +87,7 @@ const glowColors = [
 const neonGlowColors = [
   { hex: '#818cf8', glow: '#818cf8', label: 'Locked',      emoji: '🔒' },
   { hex: '#22d3ee', glow: '#22d3ee', label: 'In Progress',  emoji: '◉' },
-  { hex: '#4ade80', glow: '#4ade80', label: 'Unlocked',     emoji: '✓' },
+  { hex: '#4ade80', glow: '#4ade80', label: 'Completed',     emoji: '✓' },
   { hex: '#fbbf24', glow: '#fbbf24', label: 'Mastered',     emoji: '★' },
 ]
 
@@ -109,7 +109,7 @@ const catCurrent = ['#4472C4', '#ED7D31', '#70AD47', '#FFC000', '#00B0F0']
 // ── 12-color spectrum: 6 hues × 2 variants (light = menej sýta, dark = viac sýta)
 // Pravidlá:
 //   • žiadna z 12 farieb nesmie vizuálne kolidovať so status farbami
-//     (in-progress #5b9cf6 = modrá, unlocked #4ade80 = zelená, mastered #fbbf24 = zlatá)
+//     (in-progress #5b9cf6 = modrá, completed #4ade80 = zelená, mastered #fbbf24 = zlatá)
 //   • každá hue skupina musí byť okamžite rozlíšiteľná od ostatných
 //   • light/dark verzia tej istej hue = sub-kategória (napr. Vertical Pull / Horizontal Pull)
 
@@ -173,7 +173,7 @@ const current = {
   status: [
     { hex: '#9ca3af', label: 'Locked' },
     { hex: '#3b82f6', label: 'In Progress' },
-    { hex: '#22c55e', label: 'Unlocked' },
+    { hex: '#22c55e', label: 'Completed' },
     { hex: '#eab308', label: 'Mastered' },
   ],
   dark: [
@@ -327,72 +327,6 @@ function isLight(hex: string): boolean {
         </div>
       </div>
 
-      <!-- Neon comparison -->
-      <div class="dp__group">
-        <p class="dp__group-label" style="color: #7070a0">Neon variants — porovnanie</p>
-
-        <!-- Option A: vibrant colors, no glow -->
-        <p class="dp__comp-label" style="color: #484870; margin-bottom: 10px">A · Sýtejšie farby (bez glow)</p>
-        <div class="dp__row dp__row--wrap" style="margin-bottom: 20px">
-          <div
-            v-for="s in neonColors"
-            :key="`nA-${s.label}`"
-            class="dp__node"
-            :style="{
-              borderColor: s.hex,
-              background: s.hex + '1a',
-              color: '#e4e4f0',
-              border: `1.5px solid ${s.hex}`,
-            }"
-          >
-            <div class="dp__node-fill" :style="{ width: s.label === 'In Progress' ? '45%' : s.label === 'Unlocked' ? '75%' : s.label === 'Mastered' ? '100%' : '0%', background: s.hex + '33' }" />
-            <span class="dp__node-name">{{ s.label }}</span>
-            <span class="dp__node-badge" :style="{ background: '#1c1c38', color: '#9898b8' }">7</span>
-          </div>
-        </div>
-
-        <!-- Option B: proposed colors + glow -->
-        <p class="dp__comp-label" style="color: #484870; margin-bottom: 10px">B · Pôvodné farby + neon glow border</p>
-        <div class="dp__row dp__row--wrap" style="margin-bottom: 20px">
-          <div
-            v-for="(s, i) in proposed.dark.status"
-            :key="`nB-${s.token}`"
-            class="dp__node"
-            :style="{
-              borderColor: s.hex,
-              background: s.hex + '18',
-              color: '#e4e4f0',
-              border: `1.5px solid ${s.hex}`,
-              boxShadow: glowStyle(s.hex),
-            }"
-          >
-            <div class="dp__node-fill" :style="{ width: s.label === 'In Progress' ? '45%' : s.label === 'Unlocked' ? '75%' : s.label === 'Mastered' ? '100%' : '0%', background: s.hex + '33' }" />
-            <span class="dp__node-name">{{ s.label }}</span>
-            <span class="dp__node-badge" :style="{ background: '#1c1c38', color: '#9898b8' }">7</span>
-          </div>
-        </div>
-
-        <!-- Option C: neon colors + glow -->
-        <p class="dp__comp-label" style="color: #484870; margin-bottom: 10px">C · Sýtejšie farby + neon glow border</p>
-        <div class="dp__row dp__row--wrap" style="margin-bottom: 8px">
-          <div
-            v-for="s in neonGlowColors"
-            :key="`nC-${s.label}`"
-            class="dp__node"
-            :style="{
-              borderColor: s.hex,
-              background: s.hex + '18',
-              color: '#e4e4f0',
-              border: `1.5px solid ${s.hex}`,
-              boxShadow: glowStyle(s.hex),
-            }"
-          >
-            <div class="dp__node-fill" :style="{ width: s.label === 'In Progress' ? '45%' : s.label === 'Unlocked' ? '75%' : s.label === 'Mastered' ? '100%' : '0%', background: s.hex + '33' }" />
-            <span class="dp__node-name">{{ s.label }}</span>
-            <span class="dp__node-badge" :style="{ background: '#1c1c38', color: '#9898b8' }">7</span>
-          </div>
-        </div>
-      </div>
 
       <!-- Component previews -->
       <div class="dp__group">
@@ -436,7 +370,7 @@ function isLight(hex: string): boolean {
               <select class="dp__input" :style="{ background: '#0e0e1c', border: '1px solid #28284a', color: '#e4e4f0' }">
                 <option>🔒 Locked</option>
                 <option>◉ In Progress</option>
-                <option>✓ Unlocked</option>
+                <option>✓ Completed</option>
                 <option>★ Mastered</option>
               </select>
             </div>

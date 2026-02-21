@@ -75,7 +75,7 @@ function toggleCategory(id: string) {
       <label class="filter-panel__label">Status</label>
       <div class="filter-panel__pills">
         <button
-          v-for="status in ['all', 'locked', 'in_progress', 'unlocked', 'mastered'] as const"
+          v-for="status in ['all', 'locked', 'in_progress', 'completed', 'mastered'] as const"
           :key="status"
           class="filter-panel__pill"
           :class="{ 'filter-panel__pill--active': skillStore.statusFilter === status }"

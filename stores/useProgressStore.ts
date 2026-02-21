@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export type ProgressStatus = 'locked' | 'in_progress' | 'unlocked' | 'mastered'
+export type ProgressStatus = 'locked' | 'in_progress' | 'completed' | 'mastered'
 
 export interface SkillProgress {
   status: ProgressStatus

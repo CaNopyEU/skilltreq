@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import type { Skill, Category } from '../db/schema'
 
 export type ViewMode = 'graph-tb' | 'graph-lr' | 'list'
-export type StatusFilter = 'all' | 'locked' | 'in_progress' | 'unlocked' | 'mastered'
+export type StatusFilter = 'all' | 'locked' | 'in_progress' | 'completed' | 'mastered'
 
 export const useSkillStore = defineStore('skills', () => {
   const skills = ref<Skill[]>([])

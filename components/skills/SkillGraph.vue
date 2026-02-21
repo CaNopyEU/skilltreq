@@ -24,10 +24,24 @@ const edgeTypes = { 'skill-edge': SkillEdge }
 function onNodeClick({ node }: { node: { id: string } }) {
   emit('node-click', node.id)
 }
+
+// IntersectionObserver: pause animations when graph is not visible
+const graphRef = ref<HTMLElement>()
+const isPaused = ref(false)
+
+provide('graphIsPaused', isPaused)
+
+onMounted(() => {
+  const observer = new IntersectionObserver(([entry]) => {
+    isPaused.value = !entry.isIntersecting
+  })
+  if (graphRef.value) observer.observe(graphRef.value)
+  onUnmounted(() => observer.disconnect())
+})
 </script>
 
 <template>
-  <div class="skill-graph">
+  <div ref="graphRef" class="skill-graph">
     <VueFlow
       :nodes="layout.nodes"
       :edges="layout.edges"
