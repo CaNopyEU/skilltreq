@@ -3,6 +3,9 @@ import { defineStore } from 'pinia'
 
 export type ProgressStatus = 'locked' | 'in_progress' | 'completed' | 'mastered'
 
+// Statuses that satisfy a prerequisite requirement
+export const UNLOCKED_PREREQ_STATUSES = ['completed', 'mastered'] as const
+
 export interface SkillProgress {
   status: ProgressStatus
   current_step: number

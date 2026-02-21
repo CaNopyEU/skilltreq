@@ -24,22 +24,34 @@ const categoryHex = computed(() => category.value?.color ?? '#6b7280')
 
 const statusKey = computed(() => `var(--status-${progress.value.status.replace('_', '-')})`)
 
-// Background tinted by status colour — category shown only via the bottom bar
-const bgColor = computed(() => `color-mix(in srgb, ${statusKey.value} 12%, var(--bg-surface))`)
+// Background tinted by status colour — unlocked gets teal tint
+const bgColor = computed(() => {
+  if (isUnlocked.value && isLocked.value) {
+    return `color-mix(in srgb, var(--status-unlocked) 8%, var(--bg-surface))`
+  }
+  return `color-mix(in srgb, ${statusKey.value} 12%, var(--bg-surface))`
+})
 
 // Progress fill uses status colour
 const fillColor = computed(() => `color-mix(in srgb, ${statusKey.value} 35%, transparent)`)
 
-const borderColor = computed(() => statusKey.value)
+const borderColor = computed(() => {
+  if (isUnlocked.value && isLocked.value) return 'var(--status-unlocked)'
+  return statusKey.value
+})
 
 const isMastered = computed(() => progress.value.status === 'mastered')
 const isFocused = computed(() => props.data.skill.id === focusedSkillId.value)
 const isDimmed = computed(() => focusedSkillId.value !== null && !isInFocusBranch(props.data.skill.id))
 
 const isLocked = computed(() => progress.value.status === 'locked')
+const isUnlocked = computed(() => skillStore.isSkillUnlocked(props.data.skill.id))
 
 const glowShadow = computed(() => {
   if (isFocused.value) return `var(--focus-shadow)`
+  if (isUnlocked.value && isLocked.value) {
+    return `0 0 0 1px var(--status-unlocked-glow), 0 0 10px var(--status-unlocked-glow)`
+  }
   if (isLocked.value) return 'none'
   const v = `var(--status-${progress.value.status.replace('_', '-')}-glow)`
   return `0 0 0 1px ${v}, 0 0 14px ${v}, inset 0 0 8px ${v}`
@@ -47,6 +59,7 @@ const glowShadow = computed(() => {
 
 const nodeOpacity = computed(() => {
   if (isDimmed.value) return 0.55
+  if (isUnlocked.value && isLocked.value) return 0.85
   if (isLocked.value) return 0.6
   return 1
 })
@@ -54,7 +67,11 @@ const nodeOpacity = computed(() => {
 
 const totalSteps = computed(() => props.data.skill.progressions?.length ?? 0)
 const fillWidth = computed(() => {
-  if (totalSteps.value === 0) return '0%'
+  if (totalSteps.value === 0) {
+    // Edge case: no progressions defined but skill is completed/mastered → show full fill
+    const s = progress.value.status
+    return s === 'completed' || s === 'mastered' ? '100%' : '0%'
+  }
   const pct = Math.min(100, (progress.value.current_step / totalSteps.value) * 100)
   return `${pct}%`
 })
@@ -78,6 +95,7 @@ const categoryIcon = computed(() => {
       'skill-node--focused': isFocused,
       'skill-node--dimmed': isDimmed,
       'skill-node--mastered': isMastered,
+      'skill-node--unlocked': isUnlocked && isLocked,
     }"
     :style="{ background: bgColor, borderColor, boxShadow: glowShadow, opacity: nodeOpacity }"
   >

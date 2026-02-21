@@ -35,6 +35,35 @@ const statusIconName: Record<ProgressStatus, 'lock-closed' | 'bolt' | 'check-cir
   mastered: 'star',
 }
 
+// Computed unlocked — derived, never stored
+const isUnlocked = computed(() => (skill.value ? skillStore.isSkillUnlocked(skill.value.id) : false))
+
+// Display aliases — show 'unlocked' visually when stored as 'locked' but prereqs are met
+const displayStatusKey = computed((): ProgressStatus | 'unlocked' => {
+  const s = progress.value?.status ?? 'locked'
+  return s === 'locked' && isUnlocked.value ? 'unlocked' : s
+})
+const displayStatusLabel = computed(() =>
+  displayStatusKey.value === 'unlocked' ? 'Unlocked' : statusLabel[displayStatusKey.value as ProgressStatus],
+)
+const displayStatusIcon = computed(() =>
+  displayStatusKey.value === 'unlocked'
+    ? ('lock-open' as const)
+    : statusIconName[displayStatusKey.value as ProgressStatus],
+)
+
+// Prerequisites that are NOT yet completed/mastered — used in guard modal
+const unmetPrereqs = computed(() => {
+  if (!skill.value) return []
+  return (skill.value.requires ?? [])
+    .map((reqId) => {
+      const s = skillStore.skills.find((sk) => sk.id === reqId)
+      return s ? { skill: s, status: progressStore.getProgress(reqId).status } : null
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null)
+    .filter((p) => p.status !== 'completed' && p.status !== 'mastered')
+})
+
 // Progress
 const totalSteps = computed(() => skill.value?.progressions?.length ?? 0)
 const currentStep = computed(() => progress.value?.current_step ?? 0)
@@ -67,17 +96,34 @@ function navigate(skillId: string) {
   setFocus(skillId, skillStore.skills)
 }
 
-// Ambient header glow per status
+/**
+ * Mix a hex category colour with an RGB status colour.
+ * catWeight: 0–1 share of category colour. Returns rgba string.
+ */
+function mixCatWithStatus(catHex: string, catWeight: number, r: number, g: number, b: number, alpha: number): string {
+  const cr = parseInt(catHex.slice(1, 3), 16)
+  const cg = parseInt(catHex.slice(3, 5), 16)
+  const cb = parseInt(catHex.slice(5, 7), 16)
+  const mr = Math.round(cr * catWeight + r * (1 - catWeight))
+  const mg = Math.round(cg * catWeight + g * (1 - catWeight))
+  const mb = Math.round(cb * catWeight + b * (1 - catWeight))
+  return `rgba(${mr},${mg},${mb},${alpha})`
+}
+
+// Ambient header glow: 30% category colour + 70% status colour
 const headerGlow = computed(() => {
+  const cat = categoryHex.value
+  if (isUnlocked.value && progress.value?.status === 'locked') {
+    return `0 0 40px ${mixCatWithStatus(cat, 0.3, 157, 181, 178, 0.2)}`
+  }
   const s = progress.value?.status
   if (!s || s === 'locked') return 'none'
-  const map: Partial<Record<ProgressStatus, string>> = {
-    in_progress: '0 0 40px rgba(59,130,246,0.2)',
-    completed:   '0 0 40px rgba(34,197,94,0.15)',
-    mastered:    '0 0 40px rgba(245,158,11,0.2)',
-  }
-  return map[s] ?? 'none'
+  if (s === 'in_progress') return `0 0 40px ${mixCatWithStatus(cat, 0.3, 59, 130, 246, 0.35)}`
+  if (s === 'completed')   return `0 0 40px ${mixCatWithStatus(cat, 0.3, 34, 197, 94, 0.3)}`
+  if (s === 'mastered')    return `0 0 40px ${mixCatWithStatus(cat, 0.3, 245, 158, 11, 0.35)}`
+  return 'none'
 })
+
 
 // Status change — no parent-locked restriction; confirmation only when locking with active children
 const selectKey = ref(0)
@@ -87,15 +133,28 @@ const activeChildren = computed(() =>
 )
 
 const showLockedModal = ref(false)
+const showGuardModal = ref(false)
 
-function onStatusChange(e: Event) {
+const statusSelectOptions = [
+  { value: 'locked',      label: 'Locked',      icon: 'lock-closed'  as const },
+  { value: 'in_progress', label: 'In Progress',  icon: 'bolt'         as const },
+  { value: 'completed',   label: 'Completed',    icon: 'check-circle' as const },
+  { value: 'mastered',    label: 'Mastered',     icon: 'star'         as const },
+]
+
+function onStatusChange(val: string) {
   if (!skill.value) return
-  const val = (e.target as HTMLSelectElement).value as ProgressStatus
-  if (val === 'locked' && activeChildren.value.length > 0) {
+  const status = val as ProgressStatus
+  if (status === 'locked' && activeChildren.value.length > 0) {
     showLockedModal.value = true
     return
   }
-  progressStore.setStatus(skill.value.id, val, totalSteps.value)
+  // Guard: warn when starting a skill whose prerequisites are not yet met
+  if (status === 'in_progress' && progress.value?.status === 'locked' && !isUnlocked.value) {
+    showGuardModal.value = true
+    return
+  }
+  progressStore.setStatus(skill.value.id, status, totalSteps.value)
 }
 
 function onLockedConfirm() {
@@ -108,6 +167,18 @@ function onLockedConfirm() {
 
 function onLockedCancel() {
   showLockedModal.value = false
+  selectKey.value++
+}
+
+function onGuardConfirm() {
+  if (!skill.value) return
+  progressStore.setStatus(skill.value.id, 'in_progress', totalSteps.value)
+  toast.info(`${skill.value.name} — spustený (prerekvizity nesplnené)`)
+  showGuardModal.value = false
+}
+
+function onGuardCancel() {
+  showGuardModal.value = false
   selectKey.value++
 }
 
@@ -133,6 +204,25 @@ function onMasteryConfirm() {
 </script>
 
 <template>
+  <BaseModal
+    :open="showGuardModal"
+    title="Prerekvizity nesplnené"
+    confirm-label="Začať aj tak"
+    confirm-variant="danger"
+    cancel-label="Zrušiť"
+    @confirm="onGuardConfirm"
+    @close="onGuardCancel"
+  >
+    <p>Nasledujúce prerekvizity ešte nie sú dokončené:</p>
+    <ul class="guard-modal__list">
+      <li v-for="p in unmetPrereqs" :key="p.skill.id" class="guard-modal__item">
+        <span class="guard-modal__dot" :data-status="p.status" />
+        {{ p.skill.name }}
+      </li>
+    </ul>
+    <p class="guard-modal__note">Odporúčame ich najprv dokončiť, ale môžeš začať aj bez nich.</p>
+  </BaseModal>
+
   <BaseModal
     :open="showLockedModal"
     title="Zamknúť skill?"
@@ -169,9 +259,9 @@ function onMasteryConfirm() {
       <div class="drawer__header-top">
         <span class="drawer__cat-icon">{{ categoryIcon }}</span>
         <h2 class="drawer__title">{{ skill.name }}</h2>
-        <span class="drawer__badge" :data-status="progress.status">
-          <HIcon :name="statusIconName[progress.status]" :size="11" />
-          {{ statusLabel[progress.status] }}
+        <span class="drawer__badge" :data-status="displayStatusKey">
+          <HIcon :name="displayStatusIcon" :size="11" />
+          {{ displayStatusLabel }}
         </span>
         <button class="drawer__close" @click="emit('close')">
           <HIcon name="x-mark" :size="16" />
@@ -247,15 +337,24 @@ function onMasteryConfirm() {
         <p v-if="skill.masteryCriteria" class="drawer__mastery-crit">{{ skill.masteryCriteria }}</p>
       </section>
 
+      <!-- Unlocked: ready-to-start prompt -->
+      <div v-if="isUnlocked && progress.status === 'locked'" class="drawer__section">
+        <div class="drawer__unlocked-prompt">
+          <HIcon name="lock-open" :size="15" class="drawer__unlocked-prompt-icon" />
+          <span>Všetky prerekvizity splnené — skill je dostupný</span>
+        </div>
+      </div>
+
       <!-- Status selector -->
       <div class="drawer__section">
         <label class="drawer__label">Status</label>
-        <select :key="selectKey" class="drawer__select" :value="progress.status" @change="onStatusChange">
-          <option value="locked">○ Locked</option>
-          <option value="in_progress">◉ In Progress</option>
-          <option value="completed">✓ Completed</option>
-          <option value="mastered">★ Mastered</option>
-        </select>
+        <SelectBox
+          :key="selectKey"
+          :options="statusSelectOptions"
+          :model-value="progress.status"
+          :block="true"
+          @update:model-value="onStatusChange"
+        />
       </div>
 
       <!-- Prerequisites (parent skills) -->
@@ -322,6 +421,59 @@ function onMasteryConfirm() {
 </template>
 
 <style scoped>
+/* ── Guard modal (unmet prerequisites) ── */
+.guard-modal__list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.guard-modal__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.guard-modal__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.guard-modal__dot[data-status='locked']      { background: var(--status-locked); }
+.guard-modal__dot[data-status='in_progress'] { background: var(--status-in-progress); }
+
+.guard-modal__note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── Unlocked ready-to-start prompt ── */
+.drawer__unlocked-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--status-unlocked) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--status-unlocked) 30%, transparent);
+  font-size: 13px;
+  color: var(--status-unlocked);
+  font-weight: 500;
+}
+
+.drawer__unlocked-prompt-icon {
+  flex-shrink: 0;
+}
+
 /* ── Locked modal list ── */
 .locked-modal__list {
   list-style: none;
@@ -442,6 +594,11 @@ function onMasteryConfirm() {
   animation: shimmer 3s linear infinite;
 }
 
+.drawer__badge[data-status='unlocked'] {
+  background: color-mix(in srgb, var(--status-unlocked) 18%, transparent);
+  color: var(--status-unlocked);
+}
+
 .drawer__close {
   background: none;
   border: none;
@@ -490,6 +647,8 @@ function onMasteryConfirm() {
   padding: 14px;
   border-top: 1px solid var(--drawer-border);
   margin-top: 12px;
+  /* Prevent scroll chaining to background page on iOS/mobile */
+  overscroll-behavior: contain;
 }
 
 .drawer__desc {
@@ -704,17 +863,6 @@ function onMasteryConfirm() {
   border-left: 3px solid var(--status-mastered);
 }
 
-/* ── Select ── */
-.drawer__select {
-  width: 100%;
-  padding: 7px 10px;
-  border: 1px solid var(--border-muted);
-  border-radius: 6px;
-  font-size: 13px;
-  background: var(--bg-page);
-  color: var(--text-primary);
-  cursor: pointer;
-}
 
 /* ── Relations ── */
 .drawer__rels {

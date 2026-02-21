@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { useSkillStore } from '../../stores/useSkillStore'
+import { useProgressStore } from '../../stores/useProgressStore'
 import type { ViewMode } from '../../stores/useSkillStore'
+import type { FilterOption } from '../FilterCombo.vue'
 
 const skillStore = useSkillStore()
+const progressStore = useProgressStore()
+
+// ── View mode ────────────────────────────────────────────────────────────────
 
 const viewOptions: { value: ViewMode; label: string }[] = [
   { value: 'graph-tb', label: 'Graph – Top Down' },
@@ -10,81 +15,97 @@ const viewOptions: { value: ViewMode; label: string }[] = [
   { value: 'list', label: 'List' },
 ]
 
-function toggleCategory(id: string) {
-  const current = skillStore.categoryFilter
-  if (current.includes(id)) {
-    skillStore.categoryFilter = current.filter((c) => c !== id)
-  } else {
-    skillStore.categoryFilter = [...current, id]
-  }
-}
+// ── Sport ────────────────────────────────────────────────────────────────────
+
+const sportOptions: FilterOption[] = [
+  { value: 'all', label: 'All' },
+  { value: 'calisthenics', label: 'Calisthenics' },
+  { value: 'acrobatics', label: 'Acrobatics' },
+]
+
+// ── Type ─────────────────────────────────────────────────────────────────────
+
+const typeOptions: FilterOption[] = [
+  { value: 'all', label: 'All' },
+  { value: 'skill', label: 'Skills' },
+  { value: 'transition', label: 'Transitions' },
+]
+
+// ── Status ───────────────────────────────────────────────────────────────────
+
+const statusOptions: FilterOption[] = [
+  { value: 'all', label: 'All' },
+  { value: 'locked', label: 'Locked' },
+  { value: 'unlocked', label: 'Unlocked' },
+  { value: 'in_progress', label: 'In Progress' },
+  { value: 'completed', label: 'Completed' },
+  { value: 'mastered', label: 'Mastered' },
+]
+
+// ── Category — with completion tracker ───────────────────────────────────────
+
+const categoryOptions = computed<FilterOption[]>(() =>
+  skillStore.categories.map((cat) => {
+    const catSkills = skillStore.skills.filter((s) => s.categoryId === cat.id)
+    const mastered = catSkills.filter((s) => progressStore.getProgress(s.id).status === 'mastered').length
+    const completed = catSkills.filter((s) => {
+      const st = progressStore.getProgress(s.id).status
+      return st === 'completed' || st === 'mastered'
+    }).length
+    const total = catSkills.length
+
+    const meta = total > 0
+      ? `${completed}/${total}${mastered > 0 ? ` ★${mastered}` : ''}`
+      : undefined
+
+    return { value: cat.id, label: cat.name, color: cat.color, meta }
+  }),
+)
 </script>
 
 <template>
   <div class="filter-panel">
-    <div class="filter-panel__group">
-      <label class="filter-panel__label">View</label>
-      <select
-        class="filter-panel__select"
-        :value="skillStore.viewMode"
-        @change="skillStore.viewMode = ($event.target as HTMLSelectElement).value as ViewMode"
-      >
-        <option v-for="opt in viewOptions" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
-      </select>
+    <!-- View mode — custom select, not a filter -->
+    <div class="filter-panel__view">
+      <label class="filter-panel__view-label">View</label>
+      <SelectBox
+        :options="viewOptions"
+        :model-value="skillStore.viewMode"
+        @update:model-value="skillStore.viewMode = $event as ViewMode"
+      />
     </div>
 
-    <div class="filter-panel__group">
-      <label class="filter-panel__label">Sport</label>
-      <div class="filter-panel__pills">
-        <button
-          v-for="sport in ['all', 'calisthenics', 'acrobatics'] as const"
-          :key="sport"
-          class="filter-panel__pill"
-          :class="{ 'filter-panel__pill--active': skillStore.sportFilter === sport }"
-          @click="skillStore.sportFilter = sport"
-        >
-          {{ sport === 'all' ? 'All' : sport.charAt(0).toUpperCase() + sport.slice(1) }}
-        </button>
-      </div>
-    </div>
+    <div class="filter-panel__divider" />
 
-    <div class="filter-panel__group">
-      <label class="filter-panel__label">Category</label>
-      <div class="filter-panel__checkboxes">
-        <label class="filter-panel__check">
-          <input
-            type="checkbox"
-            :checked="skillStore.categoryFilter.length === 0"
-            @change="skillStore.categoryFilter = []"
-          />
-          All
-        </label>
-        <label v-for="cat in skillStore.categories" :key="cat.id" class="filter-panel__check">
-          <input
-            type="checkbox"
-            :checked="skillStore.categoryFilter.includes(cat.id)"
-            @change="toggleCategory(cat.id)"
-          />
-          <span :style="{ color: cat.color }">●</span>
-          {{ cat.name }}
-        </label>
-      </div>
-    </div>
+    <!-- Filters -->
+    <FilterCombo
+      label="Sport"
+      :options="sportOptions"
+      :model-value="skillStore.sportFilter"
+      @update:model-value="skillStore.sportFilter = $event as 'all' | 'calisthenics' | 'acrobatics'"
+    />
 
-    <div class="filter-panel__group">
-      <label class="filter-panel__label">Status</label>
-      <div class="filter-panel__pills">
-        <button
-          v-for="status in ['all', 'locked', 'in_progress', 'completed', 'mastered'] as const"
-          :key="status"
-          class="filter-panel__pill"
-          :class="{ 'filter-panel__pill--active': skillStore.statusFilter === status }"
-          @click="skillStore.statusFilter = status"
-        >
-          {{ status === 'all' ? 'All' : status.replace('_', ' ') }}
-        </button>
-      </div>
-    </div>
+    <FilterCombo
+      label="Type"
+      :options="typeOptions"
+      :model-value="skillStore.typeFilter"
+      @update:model-value="skillStore.typeFilter = $event as 'all' | 'skill' | 'transition'"
+    />
+
+    <FilterCombo
+      label="Category"
+      :options="categoryOptions"
+      :model-value="skillStore.categoryFilter"
+      :multi="true"
+      @update:model-value="skillStore.categoryFilter = $event as string[]"
+    />
+
+    <FilterCombo
+      label="Status"
+      :options="statusOptions"
+      :model-value="skillStore.statusFilter"
+      @update:model-value="skillStore.statusFilter = $event as typeof skillStore.statusFilter"
+    />
 
     <ThemeToggle class="filter-panel__theme" />
   </div>
@@ -94,20 +115,21 @@ function toggleCategory(id: string) {
 .filter-panel {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   padding: 8px 16px;
   background: var(--bg-surface);
   border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
 }
 
-.filter-panel__group {
+/* View mode selector */
+.filter-panel__view {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.filter-panel__label {
+.filter-panel__view-label {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -116,55 +138,12 @@ function toggleCategory(id: string) {
   white-space: nowrap;
 }
 
-.filter-panel__select {
-  padding: 4px 8px;
-  border: 1px solid var(--border-muted);
-  border-radius: 6px;
-  font-size: 13px;
-  background: var(--bg-page);
-  color: var(--text-primary);
-  cursor: pointer;
-}
 
-.filter-panel__pills {
-  display: flex;
-  gap: 4px;
-}
-
-.filter-panel__pill {
-  padding: 3px 10px;
-  border: 1px solid var(--border-muted);
-  border-radius: 20px;
-  font-size: 12px;
-  background: var(--bg-page);
-  color: var(--text-secondary);
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.filter-panel__pill:hover {
-  background: var(--bg-hover);
-}
-
-.filter-panel__pill--active {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: white;
-}
-
-.filter-panel__checkboxes {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.filter-panel__check {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  cursor: pointer;
+.filter-panel__divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  flex-shrink: 0;
 }
 
 .filter-panel__theme {

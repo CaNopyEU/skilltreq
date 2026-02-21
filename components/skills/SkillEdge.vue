@@ -2,11 +2,13 @@
 import { getBezierPath, type EdgeProps } from '@vue-flow/core'
 import { type Ref } from 'vue'
 import { useProgressStore } from '../../stores/useProgressStore'
+import { useSkillStore } from '../../stores/useSkillStore'
 import { useFocusState } from '../../composables/useFocusState'
-import { resolveEdgeVariant } from '../../utils/resolveEdgeVariant'
+import { resolveEdgeVariant, type NodeStatus } from '../../utils/resolveEdgeVariant'
 
 const props = defineProps<EdgeProps>()
 const progressStore = useProgressStore()
+const skillStore = useSkillStore()
 const { focusedSkillId, isInFocusBranch } = useFocusState()
 const graphIsPaused = inject<Ref<boolean>>('graphIsPaused', ref(false))
 
@@ -25,8 +27,14 @@ function statusVar(status: string) {
   return `var(--status-${status.replace('_', '-')})`
 }
 
-const sourceStatus = computed(() => progressStore.getProgress(props.source).status)
-const targetStatus = computed(() => progressStore.getProgress(props.target).status)
+// Use effective status: stored 'locked' becomes 'unlocked' when all prereqs are met
+function effectiveStatus(nodeId: string): NodeStatus {
+  const s = progressStore.getProgress(nodeId).status
+  return s === 'locked' && skillStore.isSkillUnlocked(nodeId) ? 'unlocked' : s
+}
+
+const sourceStatus = computed(() => effectiveStatus(props.source))
+const targetStatus = computed(() => effectiveStatus(props.target))
 
 const variant = computed(() => resolveEdgeVariant(sourceStatus.value, targetStatus.value))
 
@@ -35,16 +43,20 @@ const gradientId = computed(() => `mtc-grad-${props.id}`)
 const strokeColor = computed(() => {
   switch (variant.value) {
     case 'locked_dashed':
-    case 'locked_solid':       return 'var(--status-locked)'
-    case 'in_progress':        return 'var(--status-in-progress)'
-    case 'completed':          return 'var(--status-completed)'
-    case 'mastered':           return 'var(--status-mastered)'
+    case 'locked_solid':          return 'var(--status-locked)'
+    case 'available':             return 'var(--status-unlocked)'
+    case 'in_progress':           return 'var(--status-in-progress)'
+    case 'completed':             return 'var(--status-completed)'
+    case 'mastered':              return 'var(--status-mastered)'
     case 'mastered_to_completed': return `url(#${gradientId.value})`
   }
 })
 
 // Energy particle when flowing INTO an in_progress skill
 const isActive = computed(() => targetStatus.value === 'in_progress')
+
+// Available: completed/mastered parent → unlocked child (path is clear)
+const isAvailable = computed(() => variant.value === 'available')
 
 // Mastered edge: gold shimmer pulse (mastered→mastered or mastered→in_progress)
 const isMasteredEdge = computed(() => variant.value === 'mastered' && !isActive.value)
@@ -69,6 +81,7 @@ const isFocusActive = computed(() => {
 const strokeWidth = computed(() => {
   if (isParentEdge.value) return 2
   if (isChildEdge.value) return 1.5
+  if (variant.value === 'available') return 1.5
   return 1
 })
 
@@ -79,6 +92,7 @@ const strokeOpacity = computed(() => {
   }
   if (variant.value === 'locked_dashed') return 0.25
   if (variant.value === 'locked_solid') return 0.4
+  if (variant.value === 'available') return 0.65
   if (isActive.value) return 0.35
   return 0.6  // completed, mastered, mastered_to_completed — animate overrides for mastered
 })
@@ -127,6 +141,19 @@ const mpathId = computed(() => `ep-${props.id}`)
       Must be in the same SVG as the animateMotion elements.
     -->
     <path :id="mpathId" :d="pathData" fill="none" stroke="none" />
+
+    <!-- ── Available line — teal pulse, path is clear ── -->
+    <path
+      v-if="isAvailable"
+      :d="pathData"
+      fill="none"
+      :stroke="strokeColor"
+      :stroke-width="strokeWidth"
+      stroke-opacity="0.5"
+      :marker-end="markerEnd"
+    >
+      <animate attributeName="stroke-opacity" values="0.35;0.65;0.35" dur="2.5s" repeatCount="indefinite" />
+    </path>
 
     <!-- ── Mastered line — solid gold with shimmer pulse ── -->
     <path

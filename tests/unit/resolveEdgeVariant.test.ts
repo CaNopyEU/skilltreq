@@ -2,6 +2,10 @@ import { describe, it, expect } from 'vitest'
 import { resolveEdgeVariant } from '../../utils/resolveEdgeVariant'
 import type { NodeStatus, EdgeVariant } from '../../utils/resolveEdgeVariant'
 
+// Sanity check: NodeStatus includes 'unlocked'
+const _: NodeStatus = 'unlocked'
+void _
+
 describe('resolveEdgeVariant', () => {
   describe('locked parent → locked_dashed (all 4 children)', () => {
     const parent: NodeStatus = 'locked'
@@ -52,6 +56,22 @@ describe('resolveEdgeVariant', () => {
     ]
     it.each(cases)('mastered → %s = %s', (child, expected) => {
       expect(resolveEdgeVariant(parent, child)).toBe(expected)
+    })
+  })
+
+  describe('unlocked child — available when parent not locked', () => {
+    const cases: [NodeStatus, EdgeVariant][] = [
+      ['in_progress', 'available'],
+      ['completed', 'available'],
+      ['mastered', 'available'],
+      ['unlocked', 'available'],
+    ]
+    it.each(cases)('%s → unlocked = %s', (parent, expected) => {
+      expect(resolveEdgeVariant(parent, 'unlocked')).toBe(expected)
+    })
+
+    it('locked → unlocked = locked_dashed (parent locked takes priority)', () => {
+      expect(resolveEdgeVariant('locked', 'unlocked')).toBe('locked_dashed')
     })
   })
 })

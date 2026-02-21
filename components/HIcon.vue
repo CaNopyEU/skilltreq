@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import {
   LockClosedIcon,
+  LockOpenIcon,
   BoltIcon,
   CheckCircleIcon,
   StarIcon,
@@ -14,10 +15,12 @@ import {
   InformationCircleIcon,
   ExclamationTriangleIcon,
   CheckIcon,
+  Bars3Icon,
 } from '@heroicons/vue/20/solid'
 
 export type IconName =
   | 'lock-closed'
+  | 'lock-open'
   | 'bolt'
   | 'check-circle'
   | 'star'
@@ -30,6 +33,7 @@ export type IconName =
   | 'information-circle'
   | 'exclamation-triangle'
   | 'check'
+  | 'bars-3'
 
 const props = withDefaults(
   defineProps<{
@@ -42,6 +46,7 @@ const props = withDefaults(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const iconMap: Record<IconName, any> = {
   'lock-closed': LockClosedIcon,
+  'lock-open': LockOpenIcon,
   'bolt': BoltIcon,
   'check-circle': CheckCircleIcon,
   'star': StarIcon,
@@ -54,6 +59,7 @@ const iconMap: Record<IconName, any> = {
   'information-circle': InformationCircleIcon,
   'exclamation-triangle': ExclamationTriangleIcon,
   'check': CheckIcon,
+  'bars-3': Bars3Icon,
 }
 
 const icon = computed(() => iconMap[props.name])
