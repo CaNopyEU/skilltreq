@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSkillStore } from '../../stores/useSkillStore'
 import { useProgressStore } from '../../stores/useProgressStore'
-import type { ViewMode } from '../../stores/useSkillStore'
+import type { ViewMode, SportFilter, TypeFilter, StatusFilter } from '../../stores/useSkillStore'
 import type { FilterOption } from '../FilterCombo.vue'
 
 const skillStore = useSkillStore()
@@ -17,30 +17,69 @@ const viewOptions: { value: ViewMode; label: string }[] = [
 
 // ── Sport ────────────────────────────────────────────────────────────────────
 
-const sportOptions: FilterOption[] = [
-  { value: 'all', label: 'All' },
-  { value: 'calisthenics', label: 'Calisthenics' },
-  { value: 'acrobatics', label: 'Acrobatics' },
-]
+const sportOptions = computed<FilterOption[]>(() => {
+  const entries = [
+    { value: 'calisthenics-beginner', label: 'Calisthenics Beginner' },
+    { value: 'calisthenics-intermediate', label: 'Calisthenics Intermediate' },
+    { value: 'calisthenics-expert', label: 'Calisthenics Expert' },
+  ] as const
+  return entries.map(({ value, label }) => {
+    const group = skillStore.skills.filter((s) => s.sport === value)
+    const mastered = group.filter((s) => progressStore.getProgress(s.id).status === 'mastered').length
+    const completed = group.filter((s) => {
+      const st = progressStore.getProgress(s.id).status
+      return st === 'completed' || st === 'mastered'
+    }).length
+    const total = group.length
+    const meta = total > 0 ? `${completed}/${total}${mastered > 0 ? ` ★${mastered}` : ''}` : undefined
+    return { value, label, meta }
+  })
+})
 
 // ── Type ─────────────────────────────────────────────────────────────────────
 
-const typeOptions: FilterOption[] = [
-  { value: 'all', label: 'All' },
-  { value: 'skill', label: 'Skills' },
-  { value: 'transition', label: 'Transitions' },
-]
+const typeOptions = computed<FilterOption[]>(() => {
+  const entries = [
+    { value: 'skill', label: 'Skills' },
+    { value: 'transition', label: 'Transitions' },
+  ] as const
+  return entries.map(({ value, label }) => {
+    const group = skillStore.skills.filter((s) => s.type === value)
+    const mastered = group.filter((s) => progressStore.getProgress(s.id).status === 'mastered').length
+    const completed = group.filter((s) => {
+      const st = progressStore.getProgress(s.id).status
+      return st === 'completed' || st === 'mastered'
+    }).length
+    const total = group.length
+    const meta = total > 0 ? `${completed}/${total}${mastered > 0 ? ` ★${mastered}` : ''}` : undefined
+    return { value, label, meta }
+  })
+})
 
 // ── Status ───────────────────────────────────────────────────────────────────
 
-const statusOptions: FilterOption[] = [
-  { value: 'all', label: 'All' },
-  { value: 'locked', label: 'Locked' },
-  { value: 'unlocked', label: 'Unlocked' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'mastered', label: 'Mastered' },
-]
+const statusOptions = computed<FilterOption[]>(() => {
+  const entries = [
+    { value: 'locked', label: 'Locked' },
+    { value: 'unlocked', label: 'Unlocked' },
+    { value: 'in_progress', label: 'In Progress' },
+    { value: 'completed', label: 'Completed' },
+    { value: 'mastered', label: 'Mastered' },
+  ] as const
+  const total = skillStore.skills.length
+  return entries.map(({ value, label }) => {
+    let count = 0
+    if (value === 'unlocked') {
+      count = skillStore.skills.filter(
+        (s) => progressStore.getProgress(s.id).status === 'locked' && skillStore.isSkillUnlocked(s.id),
+      ).length
+    } else {
+      count = skillStore.skills.filter((s) => progressStore.getProgress(s.id).status === value).length
+    }
+    const meta = total > 0 ? String(count) : undefined
+    return { value, label, meta }
+  })
+})
 
 // ── Category — with completion tracker ───────────────────────────────────────
 
@@ -82,14 +121,16 @@ const categoryOptions = computed<FilterOption[]>(() =>
       label="Sport"
       :options="sportOptions"
       :model-value="skillStore.sportFilter"
-      @update:model-value="skillStore.sportFilter = $event as 'all' | 'calisthenics' | 'acrobatics'"
+      :multi="true"
+      @update:model-value="skillStore.sportFilter = $event as SportFilter[]"
     />
 
     <FilterCombo
       label="Type"
       :options="typeOptions"
       :model-value="skillStore.typeFilter"
-      @update:model-value="skillStore.typeFilter = $event as 'all' | 'skill' | 'transition'"
+      :multi="true"
+      @update:model-value="skillStore.typeFilter = $event as TypeFilter[]"
     />
 
     <FilterCombo
@@ -104,7 +145,8 @@ const categoryOptions = computed<FilterOption[]>(() =>
       label="Status"
       :options="statusOptions"
       :model-value="skillStore.statusFilter"
-      @update:model-value="skillStore.statusFilter = $event as typeof skillStore.statusFilter"
+      :multi="true"
+      @update:model-value="skillStore.statusFilter = $event as StatusFilter[]"
     />
 
     <ThemeToggle class="filter-panel__theme" />

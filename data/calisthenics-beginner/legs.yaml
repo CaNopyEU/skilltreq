@@ -1,0 +1,109 @@
+# Calisthenics Beginner – Legs
+# Dve vetvy: squat (quad dominant) a hamstring (posterior chain)
+# Gate: pistol-squat 5 strict reps each side
+
+# ── Squat vetva ───────────────────────────────────────────────────────────────
+
+- id: air-squat
+  name: Air Squat
+  category: legs
+  difficulty: 1
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Box Squat
+      mastery_criteria: "15 reps"
+    - name: Air Squat
+      mastery_criteria: "20 full ROM reps"
+  mastery_criteria: "20 full ROM reps"
+
+- id: bulgarian-split-squat
+  name: Bulgarian Split Squat
+  abbr: BSS
+  category: legs
+  difficulty: 2
+  type: skill
+  requires: [air-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Split Squat
+      mastery_criteria: "10 reps each side"
+    - name: Bulgarian Split Squat
+      mastery_criteria: "12 reps each side"
+  mastery_criteria: "12 reps each side (plné ROM)"
+
+- id: pistol-assisted
+  name: Assisted Pistol Squat
+  abbr: Asst. Pistol
+  category: legs
+  difficulty: 3
+  type: skill
+  requires: [bulgarian-split-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Box Pistol Squat
+      mastery_criteria: "8 reps each side"
+    - name: Band Assisted Pistol
+      mastery_criteria: "8 reps each side"
+    - name: Assisted Pistol Squat
+      mastery_criteria: "8 controlled reps each side"
+  mastery_criteria: "8 controlled reps each side"
+
+- id: pistol-squat
+  name: Pistol Squat
+  abbr: Pistol
+  category: legs
+  difficulty: 4
+  type: skill
+  requires: [pistol-assisted]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Pistol Squat (counterbalance)
+      mastery_criteria: "5 reps each side"
+    - name: Pistol Squat
+      mastery_criteria: "5 strict reps each side"
+  mastery_criteria: "5 strict reps each side (plné ROM)"
+
+# ── Hamstring vetva ───────────────────────────────────────────────────────────
+
+- id: hip-hinge
+  name: Hip Hinge
+  category: legs
+  difficulty: 1
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Hip Hinge (wall drill)
+      mastery_criteria: "10 controlled reps"
+    - name: Hip Hinge
+      mastery_criteria: "15 controlled reps"
+  mastery_criteria: "15 controlled reps s neutrálnou chrbticou"
+
+- id: single-leg-rdl
+  name: Single Leg RDL
+  abbr: SL RDL
+  category: legs
+  difficulty: 2
+  type: skill
+  requires: [hip-hinge]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Single Leg RDL
+      mastery_criteria: "8 reps each side"
+    - name: Single Leg RDL
+      mastery_criteria: "10 controlled reps each side"
+  mastery_criteria: "10 controlled reps each side"

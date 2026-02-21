@@ -8,7 +8,7 @@ function mockSkill(overrides: Partial<Skill> & { id: string }): Skill {
     name: overrides.id,
     abbr: null,
     categoryId: null,
-    sport: 'calisthenics',
+    sport: 'calisthenics-beginner',
     difficulty: 1,
     description: null,
     type: 'skill',
@@ -32,7 +32,7 @@ describe('useSkillStore — typeFilter', () => {
     setActivePinia(createPinia())
   })
 
-  it('default "all" shows both skills and transitions', () => {
+  it('default empty shows both skills and transitions', () => {
     const store = useSkillStore()
     store.skills = [
       mockSkill({ id: 'a', type: 'skill' }),
@@ -41,26 +41,36 @@ describe('useSkillStore — typeFilter', () => {
     expect(store.filteredSkills).toHaveLength(2)
   })
 
-  it('"skill" shows only skills', () => {
+  it('["skill"] shows only skills', () => {
     const store = useSkillStore()
     store.skills = [
       mockSkill({ id: 'a', type: 'skill' }),
       mockSkill({ id: 'b', type: 'transition' }),
     ]
-    store.typeFilter = 'skill'
+    store.typeFilter = ['skill']
     expect(store.filteredSkills).toHaveLength(1)
     expect(store.filteredSkills[0].id).toBe('a')
   })
 
-  it('"transition" shows only transitions', () => {
+  it('["transition"] shows only transitions', () => {
     const store = useSkillStore()
     store.skills = [
       mockSkill({ id: 'a', type: 'skill' }),
       mockSkill({ id: 'b', type: 'transition' }),
     ]
-    store.typeFilter = 'transition'
+    store.typeFilter = ['transition']
     expect(store.filteredSkills).toHaveLength(1)
     expect(store.filteredSkills[0].id).toBe('b')
+  })
+
+  it('["skill", "transition"] shows both', () => {
+    const store = useSkillStore()
+    store.skills = [
+      mockSkill({ id: 'a', type: 'skill' }),
+      mockSkill({ id: 'b', type: 'transition' }),
+    ]
+    store.typeFilter = ['skill', 'transition']
+    expect(store.filteredSkills).toHaveLength(2)
   })
 })
 
@@ -81,7 +91,7 @@ describe('useSkillStore — statusFilter "unlocked"', () => {
     // 'a' is completed, so 'b' is unlocked; 'c' requires 'a' which is completed — also unlocked
     // Wait, both b and c require only 'a' which is completed, so both are unlocked
     store.setProgressGetter(makeGetter({ a: 'completed', b: 'locked', c: 'locked' }))
-    store.statusFilter = 'unlocked'
+    store.statusFilter = ['unlocked']
 
     const ids = store.filteredSkills.map((s) => s.id).sort()
     expect(ids).toEqual(['b', 'c'])
@@ -94,7 +104,7 @@ describe('useSkillStore — statusFilter "unlocked"', () => {
       mockSkill({ id: 'b', requires: ['a'] }),
     ]
     store.setProgressGetter(makeGetter({ a: 'completed', b: 'in_progress' }))
-    store.statusFilter = 'unlocked'
+    store.statusFilter = ['unlocked']
 
     // 'b' is in_progress (not locked), so it doesn't show as "unlocked"
     expect(store.filteredSkills).toHaveLength(0)
@@ -109,7 +119,7 @@ describe('useSkillStore — statusFilter "unlocked"', () => {
     ]
     // 'a' completed but 'b' in_progress → 'c' not unlocked
     store.setProgressGetter(makeGetter({ a: 'completed', b: 'in_progress', c: 'locked' }))
-    store.statusFilter = 'unlocked'
+    store.statusFilter = ['unlocked']
 
     expect(store.filteredSkills).toHaveLength(0)
   })
@@ -118,9 +128,23 @@ describe('useSkillStore — statusFilter "unlocked"', () => {
     const store = useSkillStore()
     store.skills = [mockSkill({ id: 'a', requires: [] })]
     store.setProgressGetter(makeGetter({ a: 'locked' }))
-    store.statusFilter = 'unlocked'
+    store.statusFilter = ['unlocked']
 
     expect(store.filteredSkills).toHaveLength(1)
+  })
+
+  it('["unlocked", "in_progress"] matches both states', () => {
+    const store = useSkillStore()
+    store.skills = [
+      mockSkill({ id: 'a', requires: [] }),
+      mockSkill({ id: 'b', requires: ['a'] }),
+      mockSkill({ id: 'c', requires: [] }),
+    ]
+    store.setProgressGetter(makeGetter({ a: 'completed', b: 'locked', c: 'in_progress' }))
+    store.statusFilter = ['unlocked', 'in_progress']
+
+    const ids = store.filteredSkills.map((s) => s.id).sort()
+    expect(ids).toEqual(['b', 'c'])
   })
 })
 
@@ -133,12 +157,12 @@ describe('useSkillStore — combined filters', () => {
   it('typeFilter + sportFilter combine correctly', () => {
     const store = useSkillStore()
     store.skills = [
-      mockSkill({ id: 'a', type: 'skill', sport: 'calisthenics' }),
-      mockSkill({ id: 'b', type: 'transition', sport: 'calisthenics' }),
-      mockSkill({ id: 'c', type: 'skill', sport: 'acrobatics' }),
+      mockSkill({ id: 'a', type: 'skill', sport: 'calisthenics-beginner' }),
+      mockSkill({ id: 'b', type: 'transition', sport: 'calisthenics-beginner' }),
+      mockSkill({ id: 'c', type: 'skill', sport: 'calisthenics-intermediate' }),
     ]
-    store.typeFilter = 'skill'
-    store.sportFilter = 'calisthenics'
+    store.typeFilter = ['skill']
+    store.sportFilter = ['calisthenics-beginner']
 
     expect(store.filteredSkills).toHaveLength(1)
     expect(store.filteredSkills[0].id).toBe('a')

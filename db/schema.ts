@@ -10,7 +10,11 @@ import {
 
 // ── Enums ──────────────────────────────────────────────────────────────────
 
-export const sportEnum = pgEnum('sport', ['calisthenics', 'acrobatics'])
+export const sportEnum = pgEnum('sport', [
+  'calisthenics-beginner',
+  'calisthenics-intermediate',
+  'calisthenics-expert',
+])
 
 export const progressStatusEnum = pgEnum('progress_status', [
   'locked',
@@ -81,6 +85,15 @@ export const userProgress = pgTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.skillId] })],
 )
+
+// ── Enum value types (derived from pgEnum — single source of truth) ────────
+
+export type Sport = typeof sportEnum.enumValues[number]
+// → 'calisthenics-beginner' | 'calisthenics-intermediate' | 'calisthenics-expert'
+
+export const SKILL_TYPES = ['skill', 'transition'] as const
+export type SkillType = typeof SKILL_TYPES[number]
+// → 'skill' | 'transition'
 
 // ── Inferred types ─────────────────────────────────────────────────────────
 

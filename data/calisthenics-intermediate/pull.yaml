@@ -1,0 +1,178 @@
+# Calisthenics Intermediate – Pull
+# Prvé statické holdy: tuck FL, tuck BL (tuck level)
+# Cross-sport dep: bar-mu requires straight-bar-dip (calisthenics-intermediate/push)
+# Gate vstupu: pull-up (calisthenics-beginner)
+# Gate výstupu: straddle-fl / straddle-bl → full-fl / full-bl (calisthenics-expert)
+
+- id: archer-row
+  name: Archer Row
+  category: pull
+  difficulty: 4
+  type: skill
+  requires: [australian-row]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Archer Row (assisted)
+      mastery_criteria: "5 reps each side"
+    - name: Archer Row
+      mastery_criteria: "8 strict reps each side"
+  mastery_criteria: "8 strict reps each side"
+
+- id: archer-pull-up
+  name: Archer Pull-Up
+  category: pull
+  difficulty: 5
+  type: skill
+  requires: [pull-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Archer Pull-Up
+      mastery_criteria: "5 reps each side"
+    - name: Archer Pull-Up
+      mastery_criteria: "5 strict reps each side"
+  mastery_criteria: "5 strict reps each side"
+
+- id: oa-chin-up
+  name: OA Chin-Up
+  category: pull
+  difficulty: 6
+  type: skill
+  requires: [archer-pull-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Finger Assisted OA Chin-Up
+      mastery_criteria: "5 reps each side"
+    - name: Band Assisted OA Chin-Up
+      mastery_criteria: "5 reps each side"
+    - name: OA Chin-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: bar-mu
+  name: Bar Muscle-Up
+  abbr: Bar MU
+  category: pull
+  difficulty: 6
+  type: skill
+  requires: [pull-up, straight-bar-dip]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Jumping Muscle-Up
+      mastery_criteria: "5 controlled reps"
+    - name: Low Bar Muscle-Up
+      mastery_criteria: "5 reps"
+    - name: Bar Muscle-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: tuck-fl
+  name: Tuck Front Lever
+  abbr: Tuck FL
+  category: pull
+  difficulty: 5
+  type: skill
+  requires: [pull-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck FL 3s
+      mastery_criteria: "3s hold"
+    - name: Tuck FL 5s
+      mastery_criteria: "5s hold"
+    - name: Tuck FL
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: adv-tuck-fl
+  name: Adv. Tuck Front Lever
+  abbr: Adv. Tuck FL
+  category: pull
+  difficulty: 5
+  type: skill
+  requires: [tuck-fl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Adv. Tuck FL 3s
+      mastery_criteria: "3s hold"
+    - name: Adv. Tuck FL
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: straddle-fl
+  name: Straddle Front Lever
+  abbr: Straddle FL
+  category: pull
+  difficulty: 6
+  type: skill
+  requires: [adv-tuck-fl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Wide Straddle FL
+      mastery_criteria: "3s hold"
+    - name: Straddle FL
+      mastery_criteria: "5s hold"
+  mastery_criteria: "5s hold"
+
+- id: tuck-bl
+  name: Tuck Back Lever
+  abbr: Tuck BL
+  category: pull
+  difficulty: 5
+  type: skill
+  requires: [pull-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck BL 5s
+      mastery_criteria: "5s hold"
+    - name: Tuck BL
+      mastery_criteria: "15s hold"
+  mastery_criteria: "15s hold"
+
+- id: adv-tuck-bl
+  name: Adv. Tuck Back Lever
+  abbr: Adv. Tuck BL
+  category: pull
+  difficulty: 6
+  type: skill
+  requires: [tuck-bl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Adv. Tuck BL 5s
+      mastery_criteria: "5s hold"
+    - name: Adv. Tuck BL
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: straddle-bl
+  name: Straddle Back Lever
+  abbr: Straddle BL
+  category: pull
+  difficulty: 6
+  type: skill
+  requires: [adv-tuck-bl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Wide Straddle BL
+      mastery_criteria: "3s hold"
+    - name: Straddle BL
+      mastery_criteria: "5s hold"
+  mastery_criteria: "5s hold"

@@ -1,0 +1,60 @@
+# Calisthenics Intermediate – Legs
+# Shrimp squat chain + nordic curl chain
+# Gate vstupu: pistol-squat + single-leg-rdl (calisthenics-beginner)
+
+# ── Squat vetva ───────────────────────────────────────────────────────────────
+
+- id: shrimp-squat
+  name: Shrimp Squat
+  abbr: Shrimp
+  category: legs
+  difficulty: 6
+  type: skill
+  requires: [pistol-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Shrimp Squat (foot to ground)
+      mastery_criteria: "5 reps each side"
+    - name: Shrimp Squat
+      mastery_criteria: "5 strict reps each side"
+  mastery_criteria: "5 strict reps each side"
+
+# ── Hamstring vetva ───────────────────────────────────────────────────────────
+
+- id: nordic-curl-eccentric
+  name: Nordic Curl (Eccentric)
+  abbr: Nordic Neg.
+  category: legs
+  difficulty: 4
+  type: skill
+  requires: [single-leg-rdl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Nordic Curl Eccentric 3s
+      mastery_criteria: "5 reps × 3s"
+    - name: Nordic Curl Eccentric 5s
+      mastery_criteria: "5 reps × 5s"
+  mastery_criteria: "5 × 5s slow controlled negatives"
+
+- id: nordic-curl
+  name: Nordic Curl
+  abbr: Nordic
+  category: legs
+  difficulty: 6
+  type: skill
+  requires: [nordic-curl-eccentric]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Band Assisted Nordic Curl
+      mastery_criteria: "5 reps"
+    - name: Nordic Curl (partial)
+      mastery_criteria: "5 reps"
+    - name: Nordic Curl
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"

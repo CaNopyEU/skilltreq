@@ -1,0 +1,186 @@
+# Calisthenics Intermediate – Push
+# Prvé statické holdy v horizontálnej vetve (tuck planche)
+# Prvý freestanding HS statický hold (free-hs)
+# Cross-sport dep: straight-bar-dip je prereq pre bar-mu (calisthenics-intermediate/pull)
+
+# ── Horizontálna vetva ────────────────────────────────────────────────────────
+
+- id: archer-push-up
+  name: Archer Push-Up
+  category: push
+  difficulty: 4
+  type: skill
+  requires: [diamond-push-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Archer Push-Up
+      mastery_criteria: "5 reps each side"
+    - name: Archer Push-Up
+      mastery_criteria: "8 strict reps each side"
+  mastery_criteria: "8 strict reps each side"
+
+- id: tuck-planche
+  name: Tuck Planche
+  abbr: Tuck P
+  category: push
+  difficulty: 5
+  type: skill
+  requires: [archer-push-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Frog Stand
+      mastery_criteria: "10s hold"
+    - name: Tuck Planche (nogy hore)
+      mastery_criteria: "5s hold"
+    - name: Tuck Planche
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: adv-tuck-planche
+  name: Adv. Tuck Planche
+  abbr: Adv. Tuck P
+  category: push
+  difficulty: 6
+  type: skill
+  requires: [tuck-planche]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Adv. Tuck Planche 3s
+      mastery_criteria: "3s hold"
+    - name: Adv. Tuck Planche
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: straddle-planche
+  name: Straddle Planche
+  abbr: Straddle P
+  category: push
+  difficulty: 7
+  type: skill
+  requires: [adv-tuck-planche]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Wide Straddle Planche
+      mastery_criteria: "3s hold"
+    - name: Straddle Planche
+      mastery_criteria: "5s hold"
+  mastery_criteria: "5s hold"
+
+# ── Vertikálna vetva DOLE ─────────────────────────────────────────────────────
+
+- id: straight-bar-dip
+  name: Straight Bar Dip
+  abbr: SB Dip
+  category: push
+  difficulty: 5
+  type: skill
+  requires: [dip]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Straight Bar Dip
+      mastery_criteria: "5 reps"
+    - name: Straight Bar Dip
+      mastery_criteria: "10 strict reps"
+  mastery_criteria: "10 strict reps"
+
+- id: korean-dip
+  name: Korean Dip
+  category: push
+  difficulty: 6
+  type: skill
+  requires: [straight-bar-dip]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Korean Dip (negatives)
+      mastery_criteria: "5 slow negatives"
+    - name: Korean Dip Hold
+      mastery_criteria: "5s hold"
+    - name: Korean Dip
+      mastery_criteria: "5 consecutive controlled reps"
+  mastery_criteria: "5 consecutive controlled reps"
+
+# ── Vertikálna vetva HORE ─────────────────────────────────────────────────────
+
+- id: wall-hspu
+  name: Wall HSPU
+  abbr: Wall HSPU
+  category: push
+  difficulty: 4
+  type: skill
+  requires: [pike-push-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Wall HSPU (head touch)
+      mastery_criteria: "5 reps"
+    - name: Wall HSPU
+      mastery_criteria: "5 strict reps"
+  mastery_criteria: "5 strict reps (nose-to-wall)"
+
+- id: wall-hs
+  name: Wall Handstand
+  abbr: Wall HS
+  category: push
+  difficulty: 4
+  type: skill
+  requires: [wall-hspu]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Wall HS Kick-Up
+      mastery_criteria: "10 konzistentných kick-upov"
+    - name: Wall HS Hold
+      mastery_criteria: "30s hold"
+  mastery_criteria: "30s hold (nose-to-wall)"
+
+- id: free-hs
+  name: Freestanding Handstand
+  abbr: Free HS
+  category: push
+  difficulty: 5
+  type: skill
+  requires: [wall-hs]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Wall HS (od steny)
+      mastery_criteria: "3 kroky od steny"
+    - name: Kick-Up Free HS
+      mastery_criteria: "3s balance"
+    - name: Freestanding Handstand
+      mastery_criteria: "10s clean hold"
+  mastery_criteria: "10s clean hold"
+
+- id: hs-walk
+  name: Handstand Walk
+  abbr: HS Walk
+  category: push
+  difficulty: 6
+  type: skill
+  requires: [free-hs]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: HS Walk 3 kroky
+      mastery_criteria: "3 kroky konzistentne"
+    - name: HS Walk 5m
+      mastery_criteria: "5m continuous"
+    - name: Handstand Walk
+      mastery_criteria: "10m continuous"
+  mastery_criteria: "10m continuous walk"

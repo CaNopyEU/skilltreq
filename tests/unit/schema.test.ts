@@ -24,7 +24,7 @@ describe('Drizzle schema types', () => {
       name: 'Front Lever',
       abbr: 'FL',
       categoryId: 'pull',
-      sport: 'calisthenics',
+      sport: 'calisthenics-beginner',
       difficulty: 7,
       type: 'skill',
       progressions,

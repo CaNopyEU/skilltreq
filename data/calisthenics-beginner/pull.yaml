@@ -1,0 +1,118 @@
+# Calisthenics Beginner – Pull
+# Čisto dynamické pohyby, žiadne statické holdy
+# Gate: pull-up 10 strict reps, australian-row 15 reps
+
+- id: dead-hang
+  name: Dead Hang
+  category: pull
+  difficulty: 1
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Dead Hang 10s
+      mastery_criteria: "10s hold"
+    - name: Dead Hang 30s
+      mastery_criteria: "30s hold"
+  mastery_criteria: "30s passive hang"
+
+- id: active-hang
+  name: Active Hang
+  category: pull
+  difficulty: 1
+  type: skill
+  requires: [dead-hang]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Scapular Depression
+      mastery_criteria: "10 controlled reps"
+    - name: Active Hang Hold
+      mastery_criteria: "20s active hold"
+  mastery_criteria: "20s hold s depressed a retracted scapulou"
+
+- id: scap-pull
+  name: Scapular Pull
+  category: pull
+  difficulty: 2
+  type: skill
+  requires: [active-hang]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Scap Pull
+      mastery_criteria: "10 slow controlled reps"
+  mastery_criteria: "10 slow controlled reps"
+
+- id: negative-pull-up
+  name: Negative Pull-Up
+  abbr: Neg. PU
+  category: pull
+  difficulty: 2
+  type: skill
+  requires: [scap-pull]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: 3s Negative
+      mastery_criteria: "5 reps × 3s"
+    - name: 5s Negative
+      mastery_criteria: "5 reps × 5s"
+  mastery_criteria: "5 × 5s slow negatives"
+
+- id: chin-up
+  name: Chin-Up
+  category: pull
+  difficulty: 3
+  type: skill
+  requires: [negative-pull-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Band Assisted Chin-Up
+      mastery_criteria: "8 reps"
+    - name: Chin-Up
+      mastery_criteria: "10 strict reps"
+  mastery_criteria: "10 strict reps"
+
+- id: pull-up
+  name: Pull-Up
+  abbr: PU
+  category: pull
+  difficulty: 3
+  type: skill
+  requires: [chin-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Band Assisted Pull-Up
+      mastery_criteria: "8 reps"
+    - name: Close Grip Pull-Up
+      mastery_criteria: "8 reps"
+    - name: Pull-Up
+      mastery_criteria: "10 strict reps"
+  mastery_criteria: "10 strict reps"
+
+- id: australian-row
+  name: Australian Row
+  abbr: Aus. Row
+  category: pull
+  difficulty: 2
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Incline Row
+      mastery_criteria: "12 reps"
+    - name: Australian Row
+      mastery_criteria: "15 strict reps"
+  mastery_criteria: "15 strict reps"

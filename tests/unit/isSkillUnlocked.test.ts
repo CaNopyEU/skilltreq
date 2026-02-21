@@ -9,7 +9,7 @@ function mockSkill(id: string, requires: string[] = []): Skill {
     name: id,
     abbr: null,
     categoryId: null,
-    sport: 'calisthenics',
+    sport: 'calisthenics-beginner',
     difficulty: 1,
     description: null,
     type: 'skill',

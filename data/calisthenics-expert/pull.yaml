@@ -1,0 +1,109 @@
+# Calisthenics Expert – Pull
+# Plné statické pozície (FL, BL) + dynamické deriváty + OA skilly
+# Gate vstupu: straddle-fl / straddle-bl / archer-pull-up / oa-chin-up (calisthenics-intermediate)
+
+- id: oa-pull-up
+  name: OA Pull-Up
+  category: pull
+  difficulty: 7
+  type: skill
+  requires: [oa-chin-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Band Assisted OA Pull-Up
+      mastery_criteria: "5 reps each side"
+    - name: Archer Pull-Up (offset grip)
+      mastery_criteria: "5 reps each side"
+    - name: OA Pull-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: oa-row
+  name: OA Row
+  category: pull
+  difficulty: 7
+  type: skill
+  requires: [archer-row]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted OA Row
+      mastery_criteria: "5 reps each side"
+    - name: OA Row
+      mastery_criteria: "5 strict reps each side"
+  mastery_criteria: "5 strict reps each side"
+
+- id: full-fl
+  name: Front Lever
+  abbr: FL
+  category: pull
+  difficulty: 7
+  type: skill
+  requires: [straddle-fl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Half Lay Front Lever
+      mastery_criteria: "5s hold"
+    - name: Front Lever
+      mastery_criteria: "10s clean hold"
+  mastery_criteria: "10s clean hold"
+
+- id: fl-pull
+  name: Front Lever Pull
+  abbr: FL Pull
+  category: pull
+  difficulty: 8
+  type: skill
+  requires: [full-fl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck FL Pull
+      mastery_criteria: "5 reps"
+    - name: Straddle FL Pull
+      mastery_criteria: "5 reps"
+    - name: Front Lever Pull
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: full-bl
+  name: Back Lever
+  abbr: BL
+  category: pull
+  difficulty: 7
+  type: skill
+  requires: [straddle-bl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Half Lay Back Lever
+      mastery_criteria: "5s hold"
+    - name: Back Lever
+      mastery_criteria: "10s clean hold"
+  mastery_criteria: "10s clean hold"
+
+- id: bl-pull-up
+  name: Back Lever Pull-Up
+  abbr: BL Pull-Up
+  category: pull
+  difficulty: 8
+  type: skill
+  requires: [full-bl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck BL Pull-Up
+      mastery_criteria: "5 reps"
+    - name: Straddle BL Pull-Up
+      mastery_criteria: "5 reps"
+    - name: Back Lever Pull-Up
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"

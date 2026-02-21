@@ -1,5 +1,5 @@
 CREATE TYPE "public"."progress_status" AS ENUM('locked', 'in_progress', 'unlocked', 'mastered');--> statement-breakpoint
-CREATE TYPE "public"."sport" AS ENUM('calisthenics', 'acrobatics');--> statement-breakpoint
+CREATE TYPE "public"."sport" AS ENUM('calisthenics');--> statement-breakpoint
 CREATE TABLE "categories" (
 	"id" text PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,

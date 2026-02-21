@@ -1,0 +1,37 @@
+# Calisthenics Expert – Legs
+# Full shrimp squat + nordic curl full ROM
+# Gate vstupu: shrimp-squat / nordic-curl (calisthenics-intermediate)
+
+- id: full-shrimp-squat
+  name: Full Shrimp Squat
+  abbr: Full Shrimp
+  category: legs
+  difficulty: 7
+  type: skill
+  requires: [shrimp-squat]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Full Shrimp Squat (knee touch)
+      mastery_criteria: "3 reps each side"
+    - name: Full Shrimp Squat
+      mastery_criteria: "5 strict reps each side"
+  mastery_criteria: "5 strict reps each side (koleno sa dotýka zeme)"
+
+- id: nordic-curl-full
+  name: Nordic Curl (Full ROM)
+  abbr: Nordic Full
+  category: legs
+  difficulty: 7
+  type: skill
+  requires: [nordic-curl]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Nordic Curl (full descent + push return)
+      mastery_criteria: "3 reps"
+    - name: Nordic Curl Full ROM
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps (full ROM bez pomoci rúk)"

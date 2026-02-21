@@ -1,0 +1,89 @@
+# Calisthenics Beginner – Push
+# Tri smery: horizontálna (push-up), vertikálna dole (dip), vertikálna hore (pike push-up)
+# Gate: push-up 20 strict reps, dip 10 strict reps
+
+# ── Horizontálna vetva ────────────────────────────────────────────────────────
+
+- id: push-up
+  name: Push-Up
+  abbr: PU
+  category: push
+  difficulty: 2
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Incline Push-Up
+      mastery_criteria: "15 reps"
+    - name: Push-Up
+      mastery_criteria: "20 strict reps"
+  mastery_criteria: "20 strict reps"
+
+- id: diamond-push-up
+  name: Diamond Push-Up
+  category: push
+  difficulty: 3
+  type: skill
+  requires: [push-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Diamond Push-Up
+      mastery_criteria: "15 strict reps"
+  mastery_criteria: "15 strict reps"
+
+# ── Vertikálna vetva DOLE ─────────────────────────────────────────────────────
+
+- id: support-hold
+  name: Support Hold
+  abbr: Support
+  category: push
+  difficulty: 1
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Support Hold 10s
+      mastery_criteria: "10s hold"
+    - name: Support Hold 30s
+      mastery_criteria: "30s hold"
+  mastery_criteria: "30s hold (parallel bars alebo straight bar)"
+
+- id: dip
+  name: Dip
+  category: push
+  difficulty: 3
+  type: skill
+  requires: [support-hold]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Assisted Dip
+      mastery_criteria: "8 reps"
+    - name: Dip (parallel bars)
+      mastery_criteria: "10 strict reps"
+  mastery_criteria: "10 strict reps (plné ROM)"
+
+# ── Vertikálna vetva HORE ─────────────────────────────────────────────────────
+
+- id: pike-push-up
+  name: Pike Push-Up
+  category: push
+  difficulty: 2
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Elevated Pike Push-Up
+      mastery_criteria: "8 reps"
+    - name: Pike Push-Up
+      mastery_criteria: "10 strict reps"
+  mastery_criteria: "10 strict reps"

@@ -1,0 +1,87 @@
+# Calisthenics Beginner – Core
+# Foundation: hollow body, dead bug, L-sit chain, dragon flag začiatok
+# Gate: l-sit 10s
+
+- id: hollow-body
+  name: Hollow Body Hold
+  abbr: Hollow
+  category: core
+  difficulty: 1
+  type: skill
+  requires: []
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck Hollow Body
+      mastery_criteria: "20s hold"
+    - name: Hollow Body Hold
+      mastery_criteria: "30s hold"
+  mastery_criteria: "30s hold"
+
+- id: dead-bug
+  name: Dead Bug
+  category: core
+  difficulty: 1
+  type: skill
+  requires: [hollow-body]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Dead Bug (arms only)
+      mastery_criteria: "10 controlled reps"
+    - name: Dead Bug (full)
+      mastery_criteria: "10 controlled reps each side"
+  mastery_criteria: "10 controlled reps each side"
+
+- id: tuck-l-sit
+  name: Tuck L-Sit
+  abbr: Tuck L
+  category: core
+  difficulty: 2
+  type: skill
+  requires: [hollow-body]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck L-Sit 3s
+      mastery_criteria: "3s hold"
+    - name: Tuck L-Sit
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: l-sit
+  name: L-Sit
+  abbr: L-Sit
+  category: core
+  difficulty: 3
+  type: skill
+  requires: [tuck-l-sit]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: One Leg L-Sit
+      mastery_criteria: "5s hold each side"
+    - name: L-Sit
+      mastery_criteria: "10s hold"
+  mastery_criteria: "10s hold"
+
+- id: tuck-dragon-flag
+  name: Tuck Dragon Flag
+  abbr: Tuck DF
+  category: core
+  difficulty: 3
+  type: skill
+  requires: [hollow-body]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck Dragon Flag (negatives)
+      mastery_criteria: "5 slow negatives"
+    - name: Tuck Dragon Flag
+      mastery_criteria: "5 controlled reps"
+  mastery_criteria: "5 controlled reps"

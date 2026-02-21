@@ -1,0 +1,74 @@
+# Calisthenics Intermediate – Core
+# V-sit, dragon flag, human flag chain (tuck + half)
+# Cross-sport dep: tuck-human-flag requires pull-up (beginner) + push-up (beginner)
+# Gate vstupu: l-sit (calisthenics-beginner)
+
+- id: v-sit
+  name: V-Sit
+  abbr: V-Sit
+  category: core
+  difficulty: 6
+  type: skill
+  requires: [l-sit]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: V-Sit (pike compression)
+      mastery_criteria: "3s hold"
+    - name: V-Sit
+      mastery_criteria: "5s hold"
+  mastery_criteria: "5s hold"
+
+- id: dragon-flag
+  name: Dragon Flag
+  abbr: Dragon Flag
+  category: core
+  difficulty: 6
+  type: skill
+  requires: [tuck-dragon-flag]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Straddle Dragon Flag
+      mastery_criteria: "5 reps"
+    - name: Dragon Flag (negatives)
+      mastery_criteria: "5 slow negatives"
+    - name: Dragon Flag
+      mastery_criteria: "5 consecutive strict reps"
+  mastery_criteria: "5 consecutive strict reps"
+
+- id: tuck-human-flag
+  name: Tuck Human Flag
+  abbr: Tuck HF
+  category: core
+  difficulty: 5
+  type: skill
+  requires: [pull-up, push-up]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Tuck Human Flag (negatives)
+      mastery_criteria: "3 slow negatives each side"
+    - name: Tuck Human Flag
+      mastery_criteria: "5s hold each side"
+  mastery_criteria: "5s hold each side"
+
+- id: half-human-flag
+  name: Half Human Flag
+  abbr: Half HF
+  category: core
+  difficulty: 6
+  type: skill
+  requires: [tuck-human-flag]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Half Human Flag (bottom leg bent)
+      mastery_criteria: "5s hold each side"
+    - name: Half Human Flag
+      mastery_criteria: "5s hold each side"
+  mastery_criteria: "5s hold each side"

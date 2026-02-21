@@ -1,0 +1,39 @@
+# Calisthenics Expert – Core
+# Manna a Human Flag – vrcholné statické pozície
+# Gate vstupu: v-sit / half-human-flag (calisthenics-intermediate)
+
+- id: manna
+  name: Manna
+  abbr: Manna
+  category: core
+  difficulty: 9
+  type: skill
+  requires: [v-sit]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Manna (tuck)
+      mastery_criteria: "3s hold"
+    - name: Manna (straddle)
+      mastery_criteria: "3s hold"
+    - name: Manna
+      mastery_criteria: "3s clean hold"
+  mastery_criteria: "3s clean hold"
+
+- id: human-flag
+  name: Human Flag
+  abbr: HF
+  category: core
+  difficulty: 8
+  type: skill
+  requires: [half-human-flag]
+  tutorials:
+    main: ""
+    alt: ""
+  progressions:
+    - name: Human Flag (negatives)
+      mastery_criteria: "3 slow negatives each side"
+    - name: Human Flag
+      mastery_criteria: "5s clean hold each side"
+  mastery_criteria: "5s clean hold each side"

@@ -2,10 +2,11 @@
  * Seed script – Phase 0
  *
  * Importuje YAML súbory do DB:
- *   data/categories.yaml       → categories
- *   data/calisthenics/*.yaml   → skills (sport: calisthenics)
- *   data/acrobatics/*.yaml     → skills (sport: acrobatics)
- *   data/progress.json         → userProgress pre seed usera
+ *   data/categories.yaml                  → categories
+ *   data/calisthenics-beginner/*.yaml     → skills (sport: calisthenics-beginner)
+ *   data/calisthenics-intermediate/*.yaml → skills (sport: calisthenics-intermediate)
+ *   data/calisthenics-expert/*.yaml       → skills (sport: calisthenics-expert)
+ *   data/progress.json                    → userProgress pre seed usera
  *
  * Použitie: bun run db:seed
  */
@@ -85,7 +86,7 @@ async function seedCategories(): Promise<void> {
 
 async function seedSkillsFromDir(
   dir: string,
-  sport: 'calisthenics' | 'acrobatics',
+  sport: 'calisthenics-beginner' | 'calisthenics-intermediate' | 'calisthenics-expert',
 ): Promise<number> {
   const files = readdirSync(dir).filter((f) => f.endsWith('.yaml'))
   const rows: NewSkill[] = []
@@ -117,9 +118,10 @@ async function seedSkillsFromDir(
 }
 
 async function seedSkills(): Promise<void> {
-  const c = await seedSkillsFromDir(join(ROOT, 'data/calisthenics'), 'calisthenics')
-  const a = await seedSkillsFromDir(join(ROOT, 'data/acrobatics'), 'acrobatics')
-  console.log(`  ✓ skills (${c} calisthenics, ${a} acrobatics)`)
+  const b = await seedSkillsFromDir(join(ROOT, 'data/calisthenics-beginner'), 'calisthenics-beginner')
+  const i = await seedSkillsFromDir(join(ROOT, 'data/calisthenics-intermediate'), 'calisthenics-intermediate')
+  const e = await seedSkillsFromDir(join(ROOT, 'data/calisthenics-expert'), 'calisthenics-expert')
+  console.log(`  ✓ skills (${b} cal-beginner, ${i} cal-intermediate, ${e} cal-expert)`)
 }
 
 // ── Seed progress ──────────────────────────────────────────────────────────
@@ -138,22 +140,34 @@ async function seedSeedUser(): Promise<void> {
   console.log('  ✓ seed user')
 }
 
+const VALID_STATUSES = new Set(['locked', 'in_progress', 'unlocked', 'mastered'])
+
 async function seedProgress(): Promise<void> {
   const data = JSON.parse(
     readFileSync(join(ROOT, 'data/progress.json'), 'utf-8'),
   ) as YamlProgress
 
-  const rows: NewUserProgress[] = Object.entries(data.skills).map(([skillId, p]) => ({
-    userId: SEED_USER_ID,
-    skillId,
-    status: p.status as NewUserProgress['status'],
-    currentStep: p.current_step ?? 0,
-    note: p.note ?? null,
-    updatedAt: new Date(),
-  }))
+  let inserted = 0
+  let skipped = 0
 
-  await db.insert(userProgress).values(rows).onConflictDoNothing()
-  console.log(`  ✓ user_progress (${rows.length})`)
+  for (const [skillId, p] of Object.entries(data.skills)) {
+    if (!VALID_STATUSES.has(p.status)) { skipped++; continue }
+    try {
+      await db.insert(userProgress).values({
+        userId: SEED_USER_ID,
+        skillId,
+        status: p.status as NewUserProgress['status'],
+        currentStep: p.current_step ?? 0,
+        note: p.note ?? null,
+        updatedAt: new Date(),
+      }).onConflictDoNothing()
+      inserted++
+    } catch {
+      skipped++
+    }
+  }
+
+  console.log(`  ✓ user_progress (${inserted} inserted, ${skipped} skipped)`)
 }
 
 // ── Main ───────────────────────────────────────────────────────────────────
