@@ -189,11 +189,10 @@ const sortOptions: { value: ListSortBy; label: string }[] = [
       >
         <div class="skill-list__group-row">
           <span class="skill-list__group-name">{{ group.category.name }}</span>
-          <span class="skill-list__tracker">
-            {{ group.completedCount }}/{{ group.totalCount
-            }}<span v-if="group.masteredCount > 0" class="skill-list__tracker-star"> ★{{ group.masteredCount }}</span>
+          <span class="skill-list__tracker"><span v-if="group.masteredCount > 0" class="skill-list__tracker-star"> ★{{ group.masteredCount }}</span>
           </span>
-          <span class="skill-list__count">{{ group.skills.length }}</span>
+          <span class="skill-list__count">{{ group.completedCount }}/{{ group.totalCount
+            }}</span>
           <HIcon
             :name="openCategories.has(group.category.id) ? 'chevron-up' : 'chevron-down'"
             :size="12"
