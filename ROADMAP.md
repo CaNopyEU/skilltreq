@@ -197,18 +197,55 @@ GITHUB_CLIENT_SECRET=...
 ### Phase 2 – Auth
 **Cieľ**: Multi-user podpora, chránené routy.
 
-**Stratégia**: GitHub OAuth cez `@sidebase/nuxt-auth`
+**Stratégia**: GitHub OAuth + Google OAuth cez `@sidebase/nuxt-auth`
 
 - [ ] GitHub OAuth App registrácia (Settings → Developer settings → OAuth Apps)
-- [ ] `nuxt.config.ts` – auth provider konfigurácia
+- [ ] Google OAuth App registrácia (Google Cloud Console → Credentials → OAuth 2.0)
+- [ ] `nuxt.config.ts` – auth provider konfigurácia (GitHub + Google)
 - [ ] `server/api/auth/[...].ts` – NextAuth handler (sidebase)
-- [ ] Login stránka `/login` – "Prihlásiť cez GitHub" button
+- [ ] Login stránka `/login` – "Prihlásiť cez GitHub" + "Prihlásiť cez Google" buttony
 - [ ] Route middleware `auth.ts` – redirect na `/login` ak neprihlásený
 - [ ] User session v Pinia (`useAuthStore`)
 - [ ] Pri prvom login: automaticky vytvoriť `User` záznam v DB
-- [ ] Profil stránka: meno, avatar z GitHub, export dát
+- [ ] **Po prihlásení redirect priamo na `/skills`** – žiadny rozcestník, app má jediný hlavný pohľad; navigácia na `/library` a profil je dostupná z headeru
+- [ ] **Logout mechanizmus** – button v navigácii / profile, `signOut()` + redirect na `/login`
+- [ ] **Support stránka** `/support` – kontakt, FAQ, odkaz na GitHub Issues
+- [ ] Profil stránka: meno, avatar, provider (GitHub/Google), export dát
+
+> Rozcestník sa pridá až keď budú existovať stránky `/skills` aj `/library` — dovtedy redirect priamo na `/skills`.
 
 **Výstup**: Každý user má vlastný account, izolovaný progress.
+
+---
+
+### Phase 2.5 – Libraries (Skill Subscriptions)
+**Cieľ**: User si vyberie, ktoré skill knižnice sleduje — app sa prispôsobí.
+
+**Kontext**: Pole `sport` na `Skill` modeli sa premenuje na `library` — terminológia zodpovedá názvu aplikácie Skilltreq (skill tree + requirements). Knižnica = sada skillov jednej disciplíny (napr. `calisthenics-beginner`). Filter v UI sa premenuje zo "Sport" na "Library".
+
+#### DB zmeny
+- [ ] Premenovať stĺpec `sport` → `library` v `skills` tabuľke (Drizzle migrácia)
+- [ ] Premenovať `sportEnum` → `libraryEnum` v `db/schema.ts`
+- [ ] Aktualizovať seed script + YAML polia (`sport:` → `library:`)
+- [ ] Nová tabuľka `UserLibrary` (subscripcie usera):
+  ```
+  UserLibrary
+  ├── user_id
+  ├── library       (enum – rovnaké hodnoty ako skill library)
+  └── created_at
+  ```
+
+#### Stránka `/library`
+- [ ] Zoznam dostupných knižníc s popisom a počtom skillov
+- [ ] Toggle subscribe/unsubscribe per knižnicu
+- [ ] API: `GET /api/library`, `POST /api/library/:name`, `DELETE /api/library/:name`
+
+#### Integrácia do skill tree
+- [ ] Filter "Library" (bývalý "Sport") zobrazuje len subscribed knižnice ako aktívne voľby
+- [ ] Ak user nemá žiadnu subscription → výzva pridať knižnicu cez `/library`
+- [ ] Po prihlásení + prvé otvorenie `/skills` bez subscripcií → redirect na `/library`
+
+**Výstup**: App je personalizovaná — user vidí len knižnice, ktoré ho zaujímajú.
 
 ---
 
@@ -322,6 +359,9 @@ GET    /api/plans/:id/adherence   – štatistika dodržiavania
 - [ ] **E2E testy**: Playwright pre kritické flows (login, progress update, workout log)
 - [ ] **Unit testy**: Vitest pre utility funkcie (graph traversal, PR detekcia, validation)
 
+#### Nice to have
+- [ ] **Theme flickering fix** – pri načítaní stránky sa na chvíľu zobrazí light theme, až potom dark (z localStorage). Riešenie: inline `<script>` v `<head>` ktorý nastaví `class` na `<html>` pred renderom, alebo použiť cookie namiesto localStorage na uloženie preferencie (SSR-friendly).
+
 ---
 
 ## Migrácia dát
@@ -363,6 +403,7 @@ Každá fáza je deployovateľná a funkčná – nečakáš na "veľký bang".
 | [neon.tech](https://neon.tech) | Prod PostgreSQL | Phase 0 |
 | [vercel.com](https://vercel.com) | Hosting + CI/CD | Phase 0 |
 | GitHub OAuth App | Auth | Phase 2 |
+| Google Cloud Console | Google OAuth | Phase 2 |
 
 ### Neon setup (5 minút)
 1. neon.tech → New project → skopírovať `DATABASE_URL`
